@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memberships</title>
-    <link rel="stylesheet" type="text/css" href="main.css"/>
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
+
 <body>
+    <header>
+        <h1>Elite Fitness Gym</h1>
+    </header>
     <nav>
         [<a href="index.html">Home</a> |
         <a href="members.html">Members</a> |
@@ -15,5 +20,90 @@
         <a href="classes.html">Classes</a> |
         <a href="members_classes.html">MemberClasses</a>]
     </nav>
+    <br>
+    <fieldset>
+        <h2>Memberships</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>membershipID</th>
+                    <th>price</th>
+                    <th>details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>Gold</td>
+                    <td>59.99</td>
+                    <td>Gym only</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>Platinum</td>
+                    <td>79.99</td>
+                    <td>Gym + 1 class per week</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>Diamond</td>
+                    <td>99.99</td>
+                    <td>Gym + Unlimited Classes</td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <br>
+    <fieldset>
+        <h2>Add Membership</h2>
+        <label for="membershipID">memberID</label>
+        <input type="text" name="membershipID" id="membershipID" size="8" maxlength="45" />
+        <br>
+        <label for="price">price</label>
+        <input type="text" name="price" id="price" size="8" maxlength="45" />
+        <br>
+        <label for="details">details</label>
+        <input type="text" name="details" id="details" size="8" maxlength="45" />
+        <br><br>
+        <button>Add Membership</button>
+    </fieldset>
+    <br>
+    <fieldset>
+        <h2>Update Membership</h2>
+        <label for="membershipID">membershipID</label>
+        <input type="text" name="membershipID" id="membershipID" value="Gold" size="20" maxlength="45" />
+        <br>
+        <label for="price">price</label>
+        <input type="text" name="price" id="price" value="59.99" size="20" maxlength="45" />
+        <br>
+        <label for="details">details</label>
+        <input type="text" name="details" id="details" value="Gym Only" size="20" maxlength="45" />
+        <br><br>
+        <button>Edit Membership</button>
+    </fieldset>
+    <fieldset>
+        <h2>Delete Membership</h2>
+        <label for="membershipID">membershipID</label>
+        <span>Gold</span>
+        <br>
+        <label for="price">price</label>
+        <span>59.99</span>
+        <br>
+        <label for="details">details</label>
+        <span>Gym Only</span>
+        <br><br>
+        <button>Delete Membership</button>
+    </fieldset>
 </body>
+
 </html>

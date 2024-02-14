@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="main.css"/>
 </head>
 <body>
+    <header>
+        <h1>Elite Fitness Gym</h1>
+    </header>
     <nav>
         [<a href="index.html">Home</a> |
         <a href="members.html">Members</a> |
@@ -15,5 +18,125 @@
         <a href="classes.html">Classes</a> |
         <a href="members_classes.html">MemberClasses</a>]
     </nav>
+    <br>
+    <fieldset>
+        <h2>Classes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>classID</th>
+                    <th>classType</th>
+                    <th>schedule</th>
+                    <th>trainerID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>1</td>
+                    <td>HIIT</td>
+                    <td>2024-02-05 08:00:00</td>
+                    <td>9001</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>2</td>
+                    <td>Boxing</td>
+                    <td>2024-02-05 10:00:00</td>
+                    <td>9002</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>3</td>
+                    <td>BJJ</td>
+                    <td>2024-02-05 12:00:00</td>
+                    <td>9003</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>4</td>
+                    <td>Yoga</td>
+                    <td>2024-02-05 14:00:00</td>
+                    <td>9002</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>5</td>
+                    <td>Cycling</td>
+                    <td>2024-02-05 15:00:00</td>
+                    <td>9001</td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <br>
+    <fieldset>
+        <h2>Add Class</h2>
+        <label for="classID" >classID</label>
+        <input type="text" name="classID" id="classID" size="8" maxlength="45"/>
+        <br>
+        <label for="classType">classType</label>
+        <input type="text" name="classType" id="classType" size="8" maxlength="45"/>
+        <br>
+        <label for="schedule">schedule</label>
+        <input type="text" name="schedule" id="schedule" size="8" maxlength="45"/>
+        <br>
+        <label for="trainerID">trainerID</label>
+        <input type="text" name="trainerID" id="trainerID" size="8" maxlength="45"/>
+        <br><br>
+        <button>Add Class</button>
+    </fieldset>
+    <br>
+    <fieldset>
+        <h2>Update Class</h2>
+        <label for="classID" >classID</label>
+        <input type="text" name="classID" id="classID" value="1" size="8" maxlength="45"/>
+        <br>
+        <label for="classType">classType</label>
+        <input type="text" name="classType" id="classType" value="HIIT" size="8" maxlength="45"/>
+        <br>
+        <label for="schedule">schedule</label>
+        <input type="text" name="schedule" id="schedule" value="2024-02-05 08:00:00" size="15" maxlength="45"/>
+        <br>
+        <label for="trainerID">trainerID</label>
+        <input type="text" name="trainerID" id="trainerID" value="9001" size="8" maxlength="45"/>
+        <br><br>
+        <button>Edit Class</button>
+    </fieldset>
+
+    <fieldset>
+        <h2>Delete Class</h2>
+        <label for="classID">classID</label>
+        <span>1</span>
+        <br>
+        <label for="classType">classType</label>
+        <span>HIIT</span>
+        <br>
+        <label for="schedule">schedule</label>
+        <span>2024-02-05 08:00:00</span>
+        <br>
+        <label for="trainerID">trainerID</label>
+        <span>9001</span>
+        <br><br>
+        <button>Delete Class</button>
+    </fieldset>
+
 </body>
+
 </html>
