@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainers</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+    <header>
+        <h1>Elite Fitness Gym</h1>
+    </header>
+    <nav>
+        [<a href="index.html">Home</a> |
+        <a href="members.html">Members</a> |
+        <a href="memberships.html">Memberships</a> |
+        <a href="trainers.html">Trainers</a> |
+        <a href="classes.html">Classes</a> |
+        <a href="members_classes.html">MemberClasses</a>]
+    </nav>
+    <br>
+    <fieldset>
+        <h2>Trainers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th><button>New Trainer</button></th>
+                    <th>trainerID</th>
+                    <th>firstName</th>
+                    <th>lastName</th>
+                    <th>specialization</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>9000</td>
+                    <td>Billy</td>
+                    <td>Decker</td>
+                    <td>Cycling</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>9001</td>
+                    <td>Logan</td>
+                    <td>Cordova</td>
+                    <td>Strength and Conditioning</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>9002</td>
+                    <td>Ethen</td>
+                    <td>Pollard</td>
+                    <td>Pilates</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>9003</td>
+                    <td>Alyson</td>
+                    <td>Sherman</td>
+                    <td>Yoga</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                    <td>9004</td>
+                    <td>Mia</td>
+                    <td>Maddox</td>
+                    <td>Strength and Conditioning</td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <br>
+    <fieldset>
+        <h2>Add Trainer</h2>
+        <label for="firstName">firstName</label>
+        <input type="text" name="firstName" id="firstName" size="8" maxlength="45"/>
+        <br>
+        <label for="lastName">lastName</label>
+        <input type="text" name="lastName" id="lastName" size="8" maxlength="45"/>
+        <br>
+        <label for="specialization">specialization</label>
+        <input type="text" name="specialization" id="specialization" size="8" maxlength="45"/>
+        <br><br>
+        <button>Add Trainer</button>
+    </fieldset>
+    <br>
+    <fieldset>
+        <h2>Update Trainer</h2>
+        <label for="firstName">firstName</label>
+        <input type="text" name="firstName" id="firstName" value="Billy" size="8" maxlength="45"/>
+        <br>
+        <label for="lastName">lastName</label>
+        <input type="text" name="lastName" id="lastName" value="Decker" size="8" maxlength="45"/>
+        <br>
+        <label for="specialization">specialization</label>
+        <input type="text" name="specialization" id="specialization" value="cycling" size="8" maxlength="45"/>
+        <br><br>
+        <button>Edit Trainer</button>
+    </fieldset>
+
+    <fieldset>
+        <h2>Delete Trainer</h2>
+        <p>Are you sure you want to delete this Trainer?</p>
+        <label for="trainerID">trainerID</label>
+        <span>9001</span>
+        <br>
+        <label for="firstName">firstName</label>
+        <span>Billy</span>
+        <br>
+        <label for="lastName">lastName</label>
+        <span>Decker</span>
+        <br>
+        <label for="specialization">specialization</label>
+        <span>Cycling</span>
+        <br><br>
+        <button>Delete Trainer</button>
+    </fieldset>
+
+</body>
+
+</html>
