@@ -7,7 +7,7 @@
 -- DELETE query for Classes, Members, Trainers, Memberships tables 
 -- UPDATE query for Classes, Members, Trainers, Memberships tables 
 -- ADD query for Classes, Members, Trainers, Memberships tables 
--- Queries for retrieving the classes that a specific trainer teaches
+-- Query to retrieve the classes that a specific trainer teaches
 -- Queries for retrieving members based on membership level
 
 -- Query for user input will use : character to denote the variables 
@@ -154,7 +154,7 @@ SELECT lastName, firstName, phoneNumber, email
 FROM Members
 WHERE MembershipID = "Platinum";
 
---------- Queries for retrieving the classes that a specific trainer teaches ---------
+--------- Query to retrieve the classes that a specific trainer teaches ---------
     -- get all classes and schedules for a specific trainer 
 SELECT Classes.classType, Classes.schedule
 FROM Classes
