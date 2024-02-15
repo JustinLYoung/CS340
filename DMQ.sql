@@ -1,19 +1,25 @@
 -- Group 30: Justin Young and Olivia Cruz
 
--- These are some Database Manipulation queries for the EliteFitness Project Website
+-- These are some Database Manipulation queries for the Elite Fitness Project Website
 
 -- SELECT query for every table
--- INSERT entries into every table individually
+-- ADD query for Classes, Members, Trainers, Memberships tables
 -- DELETE query for Classes, Members, Trainers, Memberships tables 
--- UPDATE query for Classes, Members, Trainers, Memberships tables 
--- ADD query for Classes, Members, Trainers, Memberships tables 
--- Query to retrieve the classes that a specific trainer teaches
+-- UPDATE query for Classes, Members, Trainers, Memberships tables  
 -- Queries for retrieving members based on membership level
+-- Query to retrieve the classes that a specific trainer teaches
 
 -- Query for user input will use : character to denote the variables 
 -- that will have data from the backend programming language.
 
+-- # Citation for the following queries:
+-- # Date: 02/14/2024
+-- # Based on cs340 Course Module Database Application Design: 
+-- # URL: https://canvas.oregonstate.edu/courses/1946034/pages/exploration-database-application-design?module_item_id=23809325 
+
+
 --------------------- Classes page ---------------------
+
     -- get all details of Classes to populate in the Classes page
 SELECT * FROM Classes;
 
@@ -41,6 +47,7 @@ DELETE FROM Classes
 WHERE classID = :selected_id_by_the_user;
 
 --------------------- Memberships page ---------------------
+
     -- get all details of Memberships to populate in the Memberships page
 SELECT * FROM Memberships;
 
@@ -68,6 +75,7 @@ DELETE FROM Memberships
 WHERE MembershipID = :selected_id_by_the_user;  
 
 --------------------- Members page ---------------------
+
     -- get all details of Members to populate in the Members page
 SELECT * FROM Members;
 
@@ -108,6 +116,7 @@ DELETE FROM Members
 WHERE memberID = :selected_id_by_the_user;
 
 --------------------- Trainers page ---------------------
+
     -- get all details of Trainers to populate in the Trainers page
 SELECT * FROM Trainers;
 
@@ -135,10 +144,12 @@ DELETE FROM Trainers
 WHERE trainerID = :selected_id_by_the_user;
 
 --------------------- MemberClasses page ---------------------
+
     -- get all details for MemberClasses to populate in the MemberClasses page
 SELECT * FROM MemberClasses;
 
 --------- Queries for retrieving members based on membership level ---------
+
     -- get all members with MembershipID = "Gold"
 SELECT lastName, firstName, phoneNumber, email
 FROM Members
@@ -155,6 +166,7 @@ FROM Members
 WHERE MembershipID = "Platinum";
 
 --------- Query to retrieve the classes that a specific trainer teaches ---------
+
     -- get all classes and schedules for a specific trainer 
 SELECT Classes.classType, Classes.schedule
 FROM Classes
