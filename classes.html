@@ -11,12 +11,12 @@
         <h1>Elite Fitness Gym</h1>
     </header>
     <nav>
-        [<a href="index.html">Home</a> |
-        <a href="members.html">Members</a> |
-        <a href="memberships.html">Memberships</a> |
-        <a href="trainers.html">Trainers</a> |
-        <a href="classes.html">Classes</a> |
-        <a href="members_classes.html">MemberClasses</a>]
+        <a href="index.html">Home</a> 
+        <a href="members.html">Members</a> 
+        <a href="memberships.html">Memberships</a> 
+        <a href="trainers.html">Trainers</a> 
+        <a href="classes.html">Classes</a> 
+        <a href="members_classes.html">MemberClasses</a>
     </nav>
     <br>
     <fieldset>
@@ -24,11 +24,11 @@
         <table>
             <thead>
                 <tr>
-                    <th></th>
-                    <th>classID</th>
-                    <th>classType</th>
-                    <th>schedule</th>
-                    <th>trainerID</th>
+                    <th><button>New Class</button></th>
+                    <th>Class ID</th>
+                    <th>Class Type</th>
+                    <th>Schedule</th>
+                    <th>Trainer ID</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,16 +88,22 @@
     <br>
     <fieldset>
         <h2>Add Class</h2>
-        <label for="classID" >classID</label>
-        <input type="text" name="classID" id="classID" size="8" maxlength="45"/>
+        <label for="classType">Class Type</label>
+        <select name="classType" id="classType">
+            <option value="HIIT">HIIT</option>
+            <option value="boxing">Boxing</option>
+            <option value="BJJ">BJJ</option>
+            <option value="kickboxing">Kick Boxing</option>
+            <option value="yoga">Yoga</option>
+            <option value="cycling">Cycling</option>
+            <option value="conditioning">Conditioning</option>
+            <option value="pilates">Pilates</option>
+          </select>         
         <br>
-        <label for="classType">classType</label>
-        <input type="text" name="classType" id="classType" size="8" maxlength="45"/>
-        <br>
-        <label for="schedule">schedule</label>
+        <label for="schedule">Schedule</label>
         <input type="text" name="schedule" id="schedule" size="8" maxlength="45"/>
         <br>
-        <label for="trainerID">trainerID</label>
+        <label for="trainerID">Trainer ID</label>
         <input type="text" name="trainerID" id="trainerID" size="8" maxlength="45"/>
         <br><br>
         <button>Add Class</button>
@@ -105,16 +111,22 @@
     <br>
     <fieldset>
         <h2>Update Class</h2>
-        <label for="classID" >classID</label>
-        <input type="text" name="classID" id="classID" value="1" size="8" maxlength="45"/>
-        <br>
-        <label for="classType">classType</label>
-        <input type="text" name="classType" id="classType" value="HIIT" size="8" maxlength="45"/>
-        <br>
-        <label for="schedule">schedule</label>
+        <label for="classType">Class Type</label>
+        <select name="classType" id="classType">
+            <option value="HIIT">HIIT</option>
+            <option value="boxing">Boxing</option>
+            <option value="BJJ">BJJ</option>
+            <option value="kickboxing">Kick Boxing</option>
+            <option value="yoga">Yoga</option>
+            <option value="cycling">Cycling</option>
+            <option value="conditioning">Conditioning</option>
+            <option value="pilates">Pilates</option>
+          </select>
+          <br>
+        <label for="schedule">Schedule</label>
         <input type="text" name="schedule" id="schedule" value="2024-02-05 08:00:00" size="15" maxlength="45"/>
         <br>
-        <label for="trainerID">trainerID</label>
+        <label for="trainerID">Trainer ID</label>
         <input type="text" name="trainerID" id="trainerID" value="9001" size="8" maxlength="45"/>
         <br><br>
         <button>Edit Class</button>
@@ -122,16 +134,17 @@
 
     <fieldset>
         <h2>Delete Class</h2>
-        <label for="classID">classID</label>
+        <p>Are you sure you want to delete this class?</p>
+        <label for="classID">Class ID:</label>
         <span>1</span>
         <br>
-        <label for="classType">classType</label>
+        <label for="classType">Class Type:</label>
         <span>HIIT</span>
         <br>
-        <label for="schedule">schedule</label>
+        <label for="schedule">Schedule: </label>
         <span>2024-02-05 08:00:00</span>
         <br>
-        <label for="trainerID">trainerID</label>
+        <label for="trainerID">Trainer ID:</label>
         <span>9001</span>
         <br><br>
         <button>Delete Class</button>
