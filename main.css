@@ -12,31 +12,73 @@
 
 /*   ----- Variables  -----  */
 :root {
-    --custom-color-name:;
-    --custom-embellishment-name:;
+    --offWhite: #F2F2F2;
+    --cream: #F0F2DC;
+    --vanilla: #F0F2DF;
+    --charcoal: #485359;
+    --mocha: #8C7161;
+    --lightGrey: #B4BEBF;
+    --black: #212326;  
+    --charcoalTransparent: rgb(72, 83, 89, .8);
+    --mochaTransparent: rgb(140, 113, 97, .9);
+    --darkTeal: #326173;
+    --lightGray: #EAEFF5;
+    /* --custom-embellishment-name: */
   }
   
   /*  ----- Viewport ----- elements inherited by all remaining elements ----- */
   body {       /* Can alternatively define in html {}. */
-    background-color:;
-    background-image:;
-    color:;
-    font-family:; /* Define with at least one font name and its related generic family name.*/
-    margin:;
-    padding:;
-    max-width:;
+    background-color: var(--lightGrey);
+    /* background-image:; */
+    color: var(--black);
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif; /* Define with at least one font name and its related generic family name.*/
+    margin: 0 auto;
+    padding: 0;
+    max-width: 65%;
+    font-size: 1.2em;
   }
   
   /*  ----- Page layout blocks -----  */
-  header {}
-  main {}
-  section {}
-  article {}
+  header, footer {
+    background-color: var(--cream);
+    margin:0;
+    color: var(--black);
+    padding:2.1%;
+    border: 3px solid var(--charcoal);
+    font-family:'Signika Negative', sans-serif;
+    font-size: x-large;
+    text-align: center;
+  }
+  header img {
+    width:50px; padding:30px;
+    margin-top:-30px;
+    margin-bottom: -30px;
+    margin-left: -30px;
+    margin-bottom: -40px;
+    margin-right: -30px;
+  } 
+  main {
+    margin-top: -30px;
+    background-color: var(--charcoalTransparent);
+    margin:0;
+    color: var(--darkTeal);
+    padding:1%;
+    border: 3px solid var(--charcoal);
+  }
+  /* section {
+    background-color: var(--darkTeal);
+    padding:3%;
+  } */
+  /* article {
+    border-top: 5px solid var(--lightBlue);
+    padding:2%;
+    margin:0 auto;
+  } */
     #topic1 {}
     #topic2 {}
   div {}
   aside {}
-  footer {}
+  /* footer {} */
   
   /* ----- Anchors ----- Text links */
   a {}
@@ -46,9 +88,30 @@
   a:visited {}
   
   /*  ----- Navigation ----- Override text links for navigation only.  */
-  nav {}
-  nav a {}
-  nav a:hover {}
+  nav {    
+    text-align: center;
+    display: flex; 
+    text-decoration: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav a {
+    background-color: var(--mocha);
+    border: 2px solid var(--black);
+    border-radius: 0;
+    color: var(--lightGray);
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1;
+    padding: 3px 20px 5px 20px;
+    text-decoration: none;
+    margin-right: 3px; 
+  }
+  nav a:hover {
+    background-color:  var(--lightGray);
+    color: var(--black);
+    text-decoration: none;
+  }
   
   /*  -----  Typography  ----- */
   p {}
@@ -92,10 +155,13 @@
   ins {}
   
   /*  ----- Table ----- */
-  table {}
+  table {border-collapse: collapse;
+    width: 50%;
+    margin: auto;
+  }
   caption {}
-  thead {}
-  tbody {}
+  /* thead {} */
+  /* tbody {}
   tfoot {}
   tr {}
     tr:nth-child(even) {}
@@ -104,11 +170,50 @@
     td:nth-child(1) {}
   colgroup {}
   data {}
-  datalist {}
-  
+  datalist {} */
+  tr td {
+    border-bottom:1px solid gray;
+    min-width:100px;
+    padding:1%;
+    }
+  tr th {
+    border: 2px var(--lightGray);
+    text-align: center;  
+    background-color: var(--black);
+    color: var(--lightGray);
+    padding: 1.5%;
+  }
+  th, td {border: 2px var(--black);
+    background-color: var(--lightGray);
+    padding: 3% 3% 3% 1%;
+    text-align: left;}
+  td:nth-child(3) {
+    text-align: right;
+  }
   
   /*  ----- Form ----- */
-  form {}
+  form, button, input, select {
+    font-family:inherit;
+    font-size: 90%;
+    display: flexbox;
+    flex-wrap: row wrap;
+    width: auto;
+    padding: .5%;
+    margin: 0;
+  }
+  button {
+    background-color: var(--mocha);
+    color: var(--lightGray);
+    width: 90px;
+    font-size:small;
+    font-weight: 900;
+  } 
+  label {
+    flex-wrap: row wrap;
+    margin-top: 1%; 
+    margin-bottom: -1%;
+    padding: 0; 
+  }
   fieldset {}
     legend {}
   label {}
@@ -117,8 +222,8 @@
   select {}
     optgroup {}
     option {}
-  textarea {}
-  output {}
+  textarea {}  
+    output {}
   meter {}
   progress {}
   
