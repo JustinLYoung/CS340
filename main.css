@@ -1,167 +1,224 @@
-
-
 /*  ===== MOBILE styles (reside at the top and are inherited by all devices) ===== */
 /*  ===== See tablet, desktop, and print @media queries at the bottom. */
 
 
 /*   ----- Imports  -----  */
-  /* @import 'node_modules/modern-normalize/modern-normalize.css';  npm install modern-normalize  Resets elements for browser consistency.  https://www.npmjs.com/package/modern-normalize */         
-  /* @import "component1.css";   Component-specific stylesheets, if any.   */
-  /* @import url(//fonts.googleapis.com/css?family=Font+Name); Add fonts from a hosted services like Google Fonts.   */
+/* @import 'node_modules/modern-normalize/modern-normalize.css';  npm install modern-normalize  Resets elements for browser consistency.  https://www.npmjs.com/package/modern-normalize */
+/* @import "component1.css";   Component-specific stylesheets, if any.   */
+/* @import url(//fonts.googleapis.com/css?family=Font+Name); Add fonts from a hosted services like Google Fonts.   */
 
 
 /*   ----- Variables  -----  */
+
 :root {
-    --offWhite: #F2F2F2;
-    --cream: #F0F2DC;
-    --vanilla: #F0F2DF;
-    --charcoal: #485359;
-    --mocha: #8C7161;
-    --lightGrey: #B4BEBF;
-    --black: #212326;  
-    --charcoalTransparent: rgb(72, 83, 89, .8);
-    --mochaTransparent: rgb(140, 113, 97, .9);
-    --darkTeal: #326173;
-    --lightGray: #EAEFF5;
-    /* --custom-embellishment-name: */
-  }
-  
-  /*  ----- Viewport ----- elements inherited by all remaining elements ----- */
-  body {       /* Can alternatively define in html {}. */
-    background-color: var(--lightGrey);
-    /* background-image:; */
-    color: var(--black);
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif; /* Define with at least one font name and its related generic family name.*/
-    margin: 0 auto;
-    padding: 0;
-    max-width: 65%;
-    font-size: 1.2em;
-  }
-  
-  /*  ----- Page layout blocks -----  */
-  header, footer {
-    background-color: var(--cream);
-    margin:0;
-    color: var(--black);
-    padding:2.1%;
-    border: 3px solid var(--charcoal);
-    font-family:'Signika Negative', sans-serif;
-    font-size: x-large;
-    text-align: center;
-  }
-  header img {
-    width:50px; padding:30px;
-    margin-top:-30px;
-    margin-bottom: -30px;
-    margin-left: -30px;
-    margin-bottom: -40px;
-    margin-right: -30px;
-  } 
-  main {
-    margin-top: -30px;
-    background-color: var(--charcoalTransparent);
-    margin:0;
-    color: var(--darkTeal);
-    padding:1%;
-    border: 3px solid var(--charcoal);
-  }
-  /* section {
+  --offWhite: #F2F2F2;
+  --cream: #F0F2DC;
+  --vanilla: #F0F2DF;
+  --charcoal: #485359;
+  --mocha: #8C7161;
+  --lightGrey: #B4BEBF;
+  --black: #212326;
+  --charcoalTransparent: rgb(72, 83, 89, .8);
+  --mochaTransparent: rgb(140, 113, 97, .9);
+  --darkTeal: #326173;
+  --lightGray: #EAEFF5;
+  /* --custom-embellishment-name: */
+}
+
+/*  ----- Viewport ----- elements inherited by all remaining elements ----- */
+body {
+  /* Can alternatively define in html {}. */
+  background-color: var(--lightGrey);
+  /* background-image:; */
+  color: var(--black);
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+  /* Define with at least one font name and its related generic family name.*/
+  margin: 0 auto;
+  padding: 0;
+  max-width: 65%;
+  font-size: 1.2em;
+}
+
+/*  ----- Page layout blocks -----  */
+header,
+footer {
+  background-color: var(--cream);
+  margin: 0;
+  color: var(--black);
+  padding: 2.1%;
+  border: 3px solid var(--charcoal);
+  font-family: 'Signika Negative', sans-serif;
+  font-size: x-large;
+  text-align: center;
+}
+
+header img {
+  width: 50px;
+  padding: 30px;
+  margin-top: -30px;
+  margin-bottom: -30px;
+  margin-left: -30px;
+  margin-bottom: -40px;
+  margin-right: -30px;
+}
+
+main {
+  margin-top: -30px;
+  background-color: var(--charcoalTransparent);
+  margin: 0;
+  color: var(--darkTeal);
+  padding: 1%;
+  border: 3px solid var(--charcoal);
+}
+
+/* section {
     background-color: var(--darkTeal);
     padding:3%;
   } */
-  /* article {
+/* article {
     border-top: 5px solid var(--lightBlue);
     padding:2%;
     margin:0 auto;
   } */
-    #topic1 {}
-    #topic2 {}
-  div {}
-  aside {}
-  /* footer {} */
-  
-  /* ----- Anchors ----- Text links */
-  a {}
-  a:link {}
-  a:hover {}
-  a:active {}
-  a:visited {}
-  
-  /*  ----- Navigation ----- Override text links for navigation only.  */
-  nav {    
-    text-align: center;
-    display: flex; 
-    text-decoration: none;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  nav a {
-    background-color: var(--mocha);
-    border: 2px solid var(--black);
-    border-radius: 0;
-    color: var(--lightGray);
-    font-size: 1em;
-    font-weight: bold;
-    line-height: 1;
-    padding: 3px 20px 5px 20px;
-    text-decoration: none;
-    margin-right: 3px; 
-  }
-  nav a:hover {
-    background-color:  var(--lightGray);
-    color: var(--black);
-    text-decoration: none;
-  }
-  
-  /*  -----  Typography  ----- */
-  p {}
-  br {}
-  ol, ul, dl {}
-  li {}
-  dt {}
-  dd {}
-  
-  h1, h2, h3, h4, h5, h6 {} 
-  h1 {}
-  h2 {}
-  h3 {}
-  h4 {}
-  h5 {}
-  h6 {}
-  
-  abbr {}
-  acronym {}
-  address {}
-  blockquote {}
-    q {}
-    cite {}
-  em {}
-  hr {}
-  mark {}
-  s {}
-  span {}
-  strong {}
-  sub {}
-  sup {}
-  time {}
-  
-  /*  ----- Coding or instructional typography ----- */
-  pre {}
-  code {}
-  kbd {}
-  samp {}
-  var {}
-  del {} 
-  ins {}
-  
-  /*  ----- Table ----- */
-  table {border-collapse: collapse;
-    width: 50%;
-    margin: auto;
-  }
-  caption {}
-  /* thead {} */
-  /* tbody {}
+#topic1 {}
+
+#topic2 {}
+
+div {}
+
+aside {}
+
+/* footer {} */
+
+/* ----- Anchors ----- Text links */
+a {}
+
+a:link {}
+
+a:hover {}
+
+a:active {}
+
+a:visited {}
+
+/*  ----- Navigation ----- Override text links for navigation only.  */
+nav {
+  text-align: center;
+  display: flex;
+  text-decoration: none;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+nav a {
+  background-color: var(--mocha);
+  border: 2px solid var(--black);
+  border-radius: 0;
+  color: var(--lightGray);
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1;
+  padding: 3px 20px 5px 20px;
+  text-decoration: none;
+  margin-right: 3px;
+}
+
+nav a:hover {
+  background-color: var(--lightGray);
+  color: var(--black);
+  text-decoration: none;
+}
+
+/*  -----  Typography  ----- */
+p {}
+
+br {}
+
+ol,
+ul,
+dl {}
+
+li {}
+
+dt {}
+
+dd {}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {}
+
+h1 {}
+
+h2 {}
+
+h3 {}
+
+h4 {}
+
+h5 {}
+
+h6 {}
+
+abbr {}
+
+acronym {}
+
+address {}
+
+blockquote {}
+
+q {}
+
+cite {}
+
+em {}
+
+hr {}
+
+mark {}
+
+s {}
+
+span {}
+
+strong {}
+
+sub {}
+
+sup {}
+
+time {}
+
+/*  ----- Coding or instructional typography ----- */
+pre {}
+
+code {}
+
+kbd {}
+
+samp {}
+
+var {}
+
+del {}
+
+ins {}
+
+/*  ----- Table ----- */
+table {
+  border-collapse: collapse;
+  width: 50%;
+  margin: auto;
+}
+
+caption {}
+
+/* thead {} */
+/* tbody {}
   tfoot {}
   tr {}
     tr:nth-child(even) {}
@@ -171,107 +228,153 @@
   colgroup {}
   data {}
   datalist {} */
-  tr td {
-    border-bottom:1px solid gray;
-    min-width:100px;
-    padding:1%;
-    }
-  tr th {
-    border: 2px var(--lightGray);
-    text-align: center;  
-    background-color: var(--black);
-    color: var(--lightGray);
-    padding: 1.5%;
-  }
-  th, td {border: 2px var(--black);
-    background-color: var(--lightGray);
-    padding: 3% 3% 3% 1%;
-    text-align: left;}
-  td:nth-child(3) {
-    text-align: right;
-  }
-  
-  /*  ----- Form ----- */
-  form, button, input, select {
-    font-family:inherit;
-    font-size: 90%;
-    display: flexbox;
-    flex-wrap: row wrap;
-    width: auto;
-    padding: .5%;
-    margin: 0;
-  }
-  button {
-    background-color: var(--mocha);
-    color: var(--lightGray);
-    width: 90px;
-    font-size:small;
-    font-weight: 900;
-  } 
-  label {
-    flex-wrap: row wrap;
-    margin-top: 1%; 
-    margin-bottom: -1%;
-    padding: 0; 
-  }
-  fieldset {}
-    legend {}
-  label {}
-  button {}
-  input {}
-  select {}
-    optgroup {}
-    option {}
-  textarea {}  
-    output {}
-  meter {}
-  progress {}
-  
-  
-  /* ----- Media ----- */
-  figure {}
-    figcaption {}
-    figure img {}
-  svg {}
-  picture {}
-    source {}
-  iframe {}
-  video {}
-  audio {}
-  embed {}
-  object {}
-  
-  /*  ----- Classes for alignment, positioning, widths, grids, embellishments, and animation -----  */
-  .gallery {}
-  
-  .floatright {}
-  .floatleft {}
-  .center-middle {}
-  
-  .ten {}
-  .twenty {}
-  .thirty {}
-  .forty {}
-  .fifty {}
-  .sixty {}
-  .seventy {}
-  .eighty {}
-  
-  .radius {}
-  .circle {}
-  .boxshadow {}
-  .tshadow {} 
-  .gradient {}
-  .shape {}
-  
-  @keyframes App-logo {}
-  
-  /*   ===== TABLET  media query overrides mobile styles ===== */
-  @media all and (min-width: 600px) {}
-  
-  /*   ===== DESKTOP  media query overrides mobile and tablet styles ===== */
-  @media all and (min-width: 1080px) {}
-  
-  /*   ===== PRINT  media query overrides previous styles =====  */
-  @media print {}
-  
+tr td {
+  border-bottom: 1px solid gray;
+  min-width: 100px;
+  padding: 1%;
+}
+
+tr th {
+  border: 2px var(--lightGray);
+  text-align: center;
+  background-color: var(--black);
+  color: var(--lightGray);
+  padding: 1.5%;
+}
+
+th,
+td {
+  border: 2px var(--black);
+  background-color: var(--lightGray);
+  padding: 3% 3% 3% 1%;
+  text-align: left;
+}
+
+td:nth-child(3) {
+  text-align: right;
+}
+
+/*  ----- Form ----- */
+form,
+button,
+input,
+select {
+  font-family: inherit;
+  font-size: 90%;
+  display: flexbox;
+  flex-wrap: row wrap;
+  width: auto;
+  padding: .5%;
+  margin: 0;
+}
+
+button {
+  background-color: var(--mocha);
+  color: var(--lightGray);
+  width: 90px;
+  font-size: small;
+  font-weight: 900;
+}
+
+label {
+  flex-wrap: row wrap;
+  margin-top: 1%;
+  margin-bottom: -1%;
+  padding: 0;
+}
+
+fieldset {}
+
+legend {}
+
+label {}
+
+button {}
+
+input {}
+
+select {}
+
+optgroup {}
+
+option {}
+
+textarea {}
+
+output {}
+
+meter {}
+
+progress {}
+
+
+/* ----- Media ----- */
+figure {}
+
+figcaption {}
+
+figure img {}
+
+svg {}
+
+picture {}
+
+source {}
+
+iframe {}
+
+video {}
+
+audio {}
+
+embed {}
+
+object {}
+
+/*  ----- Classes for alignment, positioning, widths, grids, embellishments, and animation -----  */
+.gallery {}
+
+.floatright {}
+
+.floatleft {}
+
+.center-middle {}
+
+.ten {}
+
+.twenty {}
+
+.thirty {}
+
+.forty {}
+
+.fifty {}
+
+.sixty {}
+
+.seventy {}
+
+.eighty {}
+
+.radius {}
+
+.circle {}
+
+.boxshadow {}
+
+.tshadow {}
+
+.gradient {}
+
+.shape {}
+
+@keyframes App-logo {}
+
+/*   ===== TABLET  media query overrides mobile styles ===== */
+@media all and (min-width: 600px) {}
+
+/*   ===== DESKTOP  media query overrides mobile and tablet styles ===== */
+@media all and (min-width: 1080px) {}
+
+/*   ===== PRINT  media query overrides previous styles =====  */
+@media print {}
