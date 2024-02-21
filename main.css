@@ -23,6 +23,7 @@
     --mochaTransparent: rgb(140, 113, 97, .9);
     --darkTeal: #326173;
     --lightGray: #EAEFF5;
+
     /* --custom-embellishment-name: */
   }
   
@@ -36,7 +37,7 @@
     padding: 0;
     max-width: 65%;
     font-size: 1.2em;
-    
+
   }
   
   /*  ----- Page layout blocks -----  */
