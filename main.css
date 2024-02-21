@@ -247,11 +247,11 @@ td {
   border: 2px var(--black);
   background-color: var(--lightGray);
   padding: 3% 3% 3% 1%;
-  text-align: left;
+  text-align: center;
 }
 
 td:nth-child(3) {
-  text-align: right;
+  text-align: center;
 }
 
 /*  ----- Form ----- */
