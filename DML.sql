@@ -5,12 +5,8 @@
 -- SELECT query for every table
 -- ADD query for Classes, Members, Trainers, Memberships tables
 -- DELETE query for Classes, Members, Trainers, Memberships tables 
--- UPDATE query for Classes, Members, Trainers, Memberships tables  
--- Queries for retrieving members based on membership level
--- Query to retrieve the class and schedule that a specific trainer teaches
--- Query to retrieve all members and their trainers
--- Query to retrieve all classes and the names of members attending those classes
--- Query to retrieve member's name and their member class ID
+-- UPDATE query for Classes, Members, Trainers, Memberships tables 
+-- Use of JOINs in SELECT query for MembersClasses, Classes, and Members tables
 
 -- Query for user input will use : character to denote the variables 
 -- that will have data from the backend programming language.
@@ -23,10 +19,16 @@
 
 --------------------- Classes page ---------------------
 
-  -- get all details of Classes to populate in the Classes page
-SELECT * FROM Classes;
+  -- populate all details of Classes in the Classes page
+SELECT 
+    Classes.classID AS "ID",
+    Classes.classType AS "Type", 
+    Classes.schedule AS "Schedule",
+    CONCAT(Trainers.firstName, ' ', Trainers.lastName) AS "Trainer"
+FROM Classes
+LEFT JOIN Trainers ON Classes.trainerID = Trainers.trainerID;
 
-  -- add a new class (classType value comes from a dropdown list)
+  -- add a new class (classType and trainerID value comes from a dropdown list)
 INSERT INTO Classes (
     classType, 
     schedule, 
@@ -38,7 +40,7 @@ VALUES(
     :trainerIDInput
 );
 
-  -- update a class (classType value comes from a dropdown list)
+  -- update a class (classType and trainerID value comes from a dropdown list)
 UPDATE Classes
 SET classType = :classTypeInput, 
     schedule = :scheduleInput, 
@@ -51,8 +53,12 @@ WHERE classID = :selected_id_by_the_user;
 
 --------------------- Memberships page ---------------------
 
-  -- get all details of Memberships to populate in the Memberships page
-SELECT * FROM Memberships;
+  -- populate all details of Memberships in the Memberships page
+SELECT     
+    Memberships.membershipID AS "ID", 
+    Memberships.price AS "Price", 
+    Memberships.details AS "Details" 
+FROM Memberships;
 
   -- add a new membership based on the Add Membership form
 INSERT INTO Memberships (
@@ -79,10 +85,22 @@ WHERE membershipID = :selected_id_by_the_user;
 
 --------------------- Members page ---------------------
 
-  -- get all details of Members to populate in the Members page
-SELECT * FROM Members;
+  -- populate all details of Members in the Members page
+SELECT 
+    Members.memberID AS "ID",
+    Members.firstName AS "First Name",
+    Members.lastName AS "Last Name",  
+    Members.phoneNumber AS "Phone Number",
+    Members.email AS "Email",
+    Members.joinDate AS "Join Date",
+    Members.birthday AS "Birthday",
+    Members.membershipID AS "Membership",
+    CONCAT(Trainers.firstName, ' ', Trainers.lastName) AS "Trainer"
+FROM Members
+LEFT JOIN Trainers ON Members.trainerID = Trainers.trainerID;
 
   -- add a new member based on the Add Member form
+  -- (membershipID and trainerID values come from a dropdown list)
 INSERT INTO Members (
     lastName, 
     firstName, 
@@ -104,6 +122,7 @@ VALUES(
 );
 
   -- update a member's data based on the Update Member form
+  -- (membershipID and trainerID values come from a dropdown list)
 UPDATE Members
 SET lastName = :lastNameInput, 
     firstName = :firstNameInput, 
@@ -121,7 +140,11 @@ WHERE memberID = :selected_id_by_the_user;
 --------------------- Trainers page ---------------------
 
   -- get all details of Trainers to populate in the Trainers page
-SELECT * FROM Trainers;
+SELECT 
+    Trainers.trainerID AS "ID",
+    Trainers.firstName AS "First Name",
+    Trainers.lastName AS "Last Name"
+FROM Trainers;
 
   -- add a new trainer based on the Add Trainer form
 INSERT INTO Trainers (
@@ -145,65 +168,12 @@ WHERE trainerID = :selected_id_by_the_user;
 
 --------------------- MemberClasses page ---------------------
 
-  -- get all details for MemberClasses to populate in the MemberClasses page
-SELECT * FROM MemberClasses;
-
---------- Queries for retrieving members based on membership level ---------
-
-  -- get all members with MembershipID = 'Gold'
-SELECT lastName, firstName, phoneNumber, email
-FROM Members
-WHERE MembershipID = 'Gold';
-
-  -- get all members with MembershipID = 'Diamond'
-SELECT lastName, firstName, phoneNumber, email
-FROM Members
-WHERE MembershipID = 'Diamond';
-
-  -- get all members with MembershipID = 'Platinum'
-SELECT lastName, firstName, phoneNumber, email
-FROM Members
-WHERE MembershipID = 'Platinum';
-
---------- Query to retrieve the class and schedule that a specific trainer teaches ---------
-
+  -- retrieve member names with the class type they participate in, 
+  -- and their member class ID in the MemberClasses page 
 SELECT 
-  Classes.classType AS "Class", 
-  Classes.schedule AS "Schedule"
-FROM Classes
-JOIN Trainers 
-ON Classes.trainerID = Trainers.trainerID
-WHERE Trainers.trainerID = :selected_trainer_id;  
-
---------- Query to retrieve all members and their trainers ---------
-
-SELECT 
-  Members.firstName AS "First Name", 
-  Members.lastName AS "Last Name", 
-  Trainers.firstName AS "Trainer First Name", 
-  Trainers.lastName AS "Trainer Last Name"
-FROM Members
-LEFT JOIN Trainers 
-ON Members.trainerID = Trainers.trainerID;
-
---- Query to retrieve all classes and the names of members attending those classes ---
-
-SELECT 
-  Classes.classType AS "Class",
-  Classes.schedule AS "Schedule", 
-  Members.firstName AS "Member First Name", 
-  Members.lastName AS "Member Last Name"
-FROM Classes
-JOIN MemberClasses 
-ON Classes.classID = MemberClasses.classID
-JOIN Members 
-ON MemberClasses.memberID = Members.memberID;
-
---------- Query to retrieve members name and their member class ID ---------
-
-SELECT 
-	MemberClasses.memberClassesID AS "Member Class ID", 
-    CONCAT(Members.firstName, ' ', Members.lastName) AS "Member"
+    MemberClasses.memberClassesID AS "ID", 
+    CONCAT(Members.firstName, ' ', Members.lastName) AS "Member",
+    Classes.classType AS "Class Type"
 FROM MemberClasses
-INNER JOIN Members 
-ON Members.memberID = MemberClasses.memberID;
+INNER JOIN Members ON Members.memberID = MemberClasses.memberID
+INNER JOIN Classes ON MemberClasses.classID = Classes.classID;
