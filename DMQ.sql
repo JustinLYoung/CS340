@@ -8,6 +8,8 @@
 -- UPDATE query for Classes, Members, Trainers, Memberships tables  
 -- Queries for retrieving members based on membership level
 -- Query to retrieve the classes that a specific trainer teaches
+-- Query to retrieve all classes and the names of members attending those classes
+-- Query to retrieve all members and their trainers
 
 -- Query for user input will use : character to denote the variables 
 -- that will have data from the backend programming language.
@@ -165,7 +167,32 @@ WHERE MembershipID = 'Platinum';
 --------- Query to retrieve the classes that a specific trainer teaches ---------
 
   -- get all classes and schedules for a specific trainer 
-SELECT Classes.classType, Classes.schedule
+SELECT 
+  Classes.classType AS "Class", 
+  Classes.schedule AS "Schedule"
 FROM Classes
-JOIN Trainers ON Classes.trainerID = Trainers.trainerID
+JOIN Trainers 
+ON Classes.trainerID = Trainers.trainerID
 WHERE Trainers.trainerID = :selected_trainer_id;  
+
+  -- get all members and their class/classes trainers
+SELECT 
+  Members.firstName AS "First Name", 
+  Members.lastName AS "Last Name", 
+  Trainers.firstName AS "Trainer First Name", 
+  Trainers.lastName AS "Trainer Last Name"
+FROM Members
+LEFT JOIN Trainers 
+ON Members.trainerID = Trainers.trainerID;
+
+  -- get all classes and the names of members attending those classes
+SELECT 
+  Classes.classType AS "Class",
+  Classes.schedule AS "Schedule", 
+  Members.firstName AS "Member First Name", 
+  Members.lastName AS "Member Last Name"
+FROM Classes
+JOIN MemberClasses 
+ON Classes.classID = MemberClasses.classID
+JOIN Members 
+ON MemberClasses.memberID = Members.memberID;
