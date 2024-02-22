@@ -7,9 +7,10 @@
 -- DELETE query for Classes, Members, Trainers, Memberships tables 
 -- UPDATE query for Classes, Members, Trainers, Memberships tables  
 -- Queries for retrieving members based on membership level
--- Query to retrieve the classes that a specific trainer teaches
--- Query to retrieve all classes and the names of members attending those classes
+-- Query to retrieve the class and schedule that a specific trainer teaches
 -- Query to retrieve all members and their trainers
+-- Query to retrieve all classes and the names of members attending those classes
+-- Query to retrieve member's name and their member class ID
 
 -- Query for user input will use : character to denote the variables 
 -- that will have data from the backend programming language.
@@ -164,9 +165,8 @@ SELECT lastName, firstName, phoneNumber, email
 FROM Members
 WHERE MembershipID = 'Platinum';
 
---------- Query to retrieve the classes that a specific trainer teaches ---------
+--------- Query to retrieve the class and schedule that a specific trainer teaches ---------
 
-  -- get all classes and schedules for a specific trainer 
 SELECT 
   Classes.classType AS "Class", 
   Classes.schedule AS "Schedule"
@@ -175,7 +175,8 @@ JOIN Trainers
 ON Classes.trainerID = Trainers.trainerID
 WHERE Trainers.trainerID = :selected_trainer_id;  
 
-  -- get all members and their class/classes trainers
+--------- Query to retrieve all members and their trainers ---------
+
 SELECT 
   Members.firstName AS "First Name", 
   Members.lastName AS "Last Name", 
@@ -185,7 +186,8 @@ FROM Members
 LEFT JOIN Trainers 
 ON Members.trainerID = Trainers.trainerID;
 
-  -- get all classes and the names of members attending those classes
+--- Query to retrieve all classes and the names of members attending those classes ---
+
 SELECT 
   Classes.classType AS "Class",
   Classes.schedule AS "Schedule", 
@@ -196,3 +198,12 @@ JOIN MemberClasses
 ON Classes.classID = MemberClasses.classID
 JOIN Members 
 ON MemberClasses.memberID = Members.memberID;
+
+--------- Query to retrieve members name and their member class ID ---------
+
+SELECT 
+	MemberClasses.memberClassesID AS "Member Class ID", 
+    CONCAT(Members.firstName, ' ', Members.lastName) AS "Member"
+FROM MemberClasses
+INNER JOIN Members 
+ON Members.memberID = MemberClasses.memberID;
