@@ -8,6 +8,8 @@
 -- UPDATE query for Classes, Members, Trainers, Memberships tables  
 -- Queries for retrieving members based on membership level
 -- Query to retrieve the classes that a specific trainer teaches
+-- Query to retrieve all classes and the names of members attending those classes
+-- Query to retrieve all members and their trainers
 
 -- Query for user input will use : character to denote the variables 
 -- that will have data from the backend programming language.
@@ -20,7 +22,7 @@
 
 --------------------- Classes page ---------------------
 
-    -- get all details of Classes to populate in the Classes page
+  -- get all details of Classes to populate in the Classes page
 SELECT * FROM Classes;
 
   -- add a new class (classType value comes from a dropdown list)
@@ -35,23 +37,23 @@ VALUES(
     :trainerIDInput
 );
 
-    -- update a class (classType value comes from a dropdown list)
+  -- update a class (classType value comes from a dropdown list)
 UPDATE Classes
 SET classType = :classTypeInput, 
     schedule = :scheduleInput, 
     trainerID = :trainerIDInput
 WHERE classID = :selected_id_by_the_user;
 
-    -- delete a class
+  -- delete a class
 DELETE FROM Classes
 WHERE classID = :selected_id_by_the_user;
 
 --------------------- Memberships page ---------------------
 
-    -- get all details of Memberships to populate in the Memberships page
+  -- get all details of Memberships to populate in the Memberships page
 SELECT * FROM Memberships;
 
-    -- add a new membership
+  -- add a new membership based on the Add Membership form
 INSERT INTO Memberships (
     membershipID, 
     price, 
@@ -63,23 +65,23 @@ VALUES(
     :detailsInput
 );
 
-    -- update a Memberships
+  -- update a membership's data based on the Update Membership form
 UPDATE Memberships
 SET membershipID = :membershipIDInput, 
     price = :priceInput, 
     details = :detailsInput
 WHERE membershipID = :selected_id_by_the_user;
 
-  -- delete an Memberships
+  -- delete a membership
 DELETE FROM Memberships
-WHERE MembershipID = :selected_id_by_the_user;  
+WHERE membershipID = :selected_id_by_the_user;  
 
 --------------------- Members page ---------------------
 
-    -- get all details of Members to populate in the Members page
+  -- get all details of Members to populate in the Members page
 SELECT * FROM Members;
 
-    -- add a new member
+  -- add a new member based on the Add Member form
 INSERT INTO Members (
     lastName, 
     firstName, 
@@ -91,16 +93,16 @@ INSERT INTO Members (
     trainerID 
 ) 
 VALUES(
-    lastName = :lastNameInput, 
-    firstName = :firstNameInput, 
-    phoneNumber = :phoneNumberInput,
-    email = :emailInput,
-    joinDate = :joinDateInput,
-    membershipID = :membershipIDInput,
-    trainerID = :trainerIDInput
+    :lastNameInput, 
+    :firstNameInput, 
+    :phoneNumberInput,
+    :emailInput,
+    :joinDateInput,
+    :membershipIDInput,
+    :trainerIDInput
 );
 
-    -- update a member's data based on Update Member form
+  -- update a member's data based on the Update Member form
 UPDATE Members
 SET lastName = :lastNameInput, 
     firstName = :firstNameInput, 
@@ -111,64 +113,86 @@ SET lastName = :lastNameInput,
     trainerID = :trainerIDInput
 WHERE memberID = :selected_id_by_the_user;
 
-    -- delete a member
+  -- delete a member
 DELETE FROM Members
 WHERE memberID = :selected_id_by_the_user;
 
 --------------------- Trainers page ---------------------
 
-    -- get all details of Trainers to populate in the Trainers page
+  -- get all details of Trainers to populate in the Trainers page
 SELECT * FROM Trainers;
 
-  -- add a new trainer based on Add Trainer form
+  -- add a new trainer based on the Add Trainer form
 INSERT INTO Trainers (
     firstName, 
-    lastName, 
-    specialization
+    lastName
 )
 VALUES (
     :firstNameInput, 
-    :lastNameInput, 
-    :specializationInput
+    :lastNameInput
 );
 
-    -- update a trainer's data based on Update Trainer form
+  -- update a trainer's data based on the Update Trainer form
 UPDATE Trainers
 SET firstName = :firstNameInput, 
-    lastName = :lastNameInput, 
-    specialization = :specializationInput
+    lastName = :lastNameInput 
 WHERE trainerID = :selected_id_by_the_user;
 
-    -- delete a trainer
+  -- delete a trainer
 DELETE FROM Trainers
 WHERE trainerID = :selected_id_by_the_user;
 
 --------------------- MemberClasses page ---------------------
 
-    -- get all details for MemberClasses to populate in the MemberClasses page
+  -- get all details for MemberClasses to populate in the MemberClasses page
 SELECT * FROM MemberClasses;
 
 --------- Queries for retrieving members based on membership level ---------
 
-    -- get all members with MembershipID = "Gold"
+  -- get all members with MembershipID = 'Gold'
 SELECT lastName, firstName, phoneNumber, email
 FROM Members
-WHERE MembershipID = "Gold";
+WHERE MembershipID = 'Gold';
 
-    -- get all members with MembershipID = "Diamond"
+  -- get all members with MembershipID = 'Diamond'
 SELECT lastName, firstName, phoneNumber, email
 FROM Members
-WHERE MembershipID = "Diamond";
+WHERE MembershipID = 'Diamond';
 
-    -- get all members with MembershipID = "Platinum"
+  -- get all members with MembershipID = 'Platinum'
 SELECT lastName, firstName, phoneNumber, email
 FROM Members
-WHERE MembershipID = "Platinum";
+WHERE MembershipID = 'Platinum';
 
 --------- Query to retrieve the classes that a specific trainer teaches ---------
 
-    -- get all classes and schedules for a specific trainer 
-SELECT Classes.classType, Classes.schedule
+  -- get all classes and schedules for a specific trainer 
+SELECT 
+  Classes.classType AS "Class", 
+  Classes.schedule AS "Schedule"
 FROM Classes
-JOIN Trainers ON Classes.trainerID = Trainers.trainerID
+JOIN Trainers 
+ON Classes.trainerID = Trainers.trainerID
 WHERE Trainers.trainerID = :selected_trainer_id;  
+
+  -- get all members and their class/classes trainers
+SELECT 
+  Members.firstName AS "First Name", 
+  Members.lastName AS "Last Name", 
+  Trainers.firstName AS "Trainer First Name", 
+  Trainers.lastName AS "Trainer Last Name"
+FROM Members
+LEFT JOIN Trainers 
+ON Members.trainerID = Trainers.trainerID;
+
+  -- get all classes and the names of members attending those classes
+SELECT 
+  Classes.classType AS "Class",
+  Classes.schedule AS "Schedule", 
+  Members.firstName AS "Member First Name", 
+  Members.lastName AS "Member Last Name"
+FROM Classes
+JOIN MemberClasses 
+ON Classes.classID = MemberClasses.classID
+JOIN Members 
+ON MemberClasses.memberID = Members.memberID;
