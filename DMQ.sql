@@ -51,7 +51,7 @@ WHERE classID = :selected_id_by_the_user;
   -- get all details of Memberships to populate in the Memberships page
 SELECT * FROM Memberships;
 
-  -- add a new membership
+  -- add a new membership based on the Add Membership form
 INSERT INTO Memberships (
     membershipID, 
     price, 
@@ -63,14 +63,14 @@ VALUES(
     :detailsInput
 );
 
-  -- update a Memberships
+  -- update a membership's data based on the Update Membership form
 UPDATE Memberships
 SET membershipID = :membershipIDInput, 
     price = :priceInput, 
     details = :detailsInput
 WHERE membershipID = :selected_id_by_the_user;
 
-  -- delete an Memberships
+  -- delete a membership
 DELETE FROM Memberships
 WHERE membershipID = :selected_id_by_the_user;  
 
@@ -79,7 +79,7 @@ WHERE membershipID = :selected_id_by_the_user;
   -- get all details of Members to populate in the Members page
 SELECT * FROM Members;
 
-  -- add a new member
+  -- add a new member based on the Add Member form
 INSERT INTO Members (
     lastName, 
     firstName, 
@@ -100,7 +100,7 @@ VALUES(
     :trainerIDInput
 );
 
-  -- update a member's data based on Update Member form
+  -- update a member's data based on the Update Member form
 UPDATE Members
 SET lastName = :lastNameInput, 
     firstName = :firstNameInput, 
@@ -120,18 +120,17 @@ WHERE memberID = :selected_id_by_the_user;
   -- get all details of Trainers to populate in the Trainers page
 SELECT * FROM Trainers;
 
-  -- add a new trainer based on Add Trainer form
+  -- add a new trainer based on the Add Trainer form
 INSERT INTO Trainers (
     firstName, 
-    lastName, 
-    specialization
+    lastName
 )
 VALUES (
     :firstNameInput, 
     :lastNameInput
 );
 
-  -- update a trainer's data based on Update Trainer form
+  -- update a trainer's data based on the Update Trainer form
 UPDATE Trainers
 SET firstName = :firstNameInput, 
     lastName = :lastNameInput 
