@@ -35,10 +35,6 @@
                     <th>Class Type</th>
                     <th>Schedule</th>
                     <th>Trainer ID</th>
-                    <th>Class ID</th>
-                    <th>Class Type</th>
-                    <th>Schedule</th>
-                    <th>Trainer ID</th>
                 </tr>
             </thead>
             <tbody>
@@ -111,7 +107,6 @@
           </select>         
         <br>
         <label for="schedule">Schedule</label>
-        <label for="schedule">Schedule</label>
         <input type="text" name="schedule" id="schedule" size="8" maxlength="45"/>
         <br>
         <label for="trainerID">Trainer ID</label>
@@ -121,14 +116,15 @@
             <option value="9002">9002</option>
             <option value="9003">9003</option>
             <option value="9004">9004</option>
-          </select>  
-        <br><br>
+            <option value="9005">9005</option>
+            <option value="None">None</option>
+          </select>
+          <br><br>
         <button>Add Class</button>
     </fieldset>
     <br>
     <fieldset>
         <h2>Update Class</h2>
-        <label for="classType">Class Type</label>
         <label for="classType">Class Type</label>
         <select name="classType" id="classType">
             <option value="HIIT">HIIT</option>
@@ -151,8 +147,10 @@
             <option value="9002">9002</option>
             <option value="9003">9003</option>
             <option value="9004">9004</option>
-          </select>  
-        <br><br>
+            <option value="9005">9005</option>
+            <option value="None">None</option>
+          </select>
+          <br><br>
         <button>Edit Class</button>
     </fieldset>
 
