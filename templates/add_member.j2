@@ -1,0 +1,63 @@
+{# 
+-- Citation for code to create the add_member jinja2 file layout and populated dropdown menus
+-- Date: 2/27/24
+-- Based on OSU Flask Starter App GitHub: 
+https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/templates/edit_people.j2
+#}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Member</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+    <header>
+        <h1>Add New Member</h1>
+    </header>
+    <form action="/add_member" method="POST">
+        <fieldset>
+            <legend>Member Details</legend>
+            <label for="firstName">First Name:</label>
+            <input type="text" name="firstName" id="firstName" required>
+            
+            <label for="lastName">Last Name:</label>
+            <input type="text" name="lastName" id="lastName" required>
+            
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" name="phoneNumber" id="phoneNumber" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+            
+            <label for="joinDate">Join Date:</label>
+            <input type="date" name="joinDate" id="joinDate" required>
+            
+            <label for="birthday">Birthday:</label>
+            <input type="date" name="birthday" id="birthday" required>
+
+            <label for="membershipID">Membership:</label>
+            <select name="membershipID" id="membershipID" required>
+                {% for membership in memberships %}
+                <option value="{{ membership.membershipID }}">{{ membership.membershipID }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="trainerID">Trainer:</label>
+            <select name="trainerID" id="trainerID">
+                <option value="">None</option>
+                {% for trainer in trainers %}
+                <option value="{{ trainer.trainerID }}">{{ trainer.Trainer }}</option>
+                {% endfor %}
+            </select>
+            
+            {# <button type="submit" name = "Add_New_Member">Add New Member</button> #}
+            <input type="submit" value="Add New Member" name="Add_New_Member" class="btn btn-primary" style="margin:.5rem;">
+            <a href='/members'><input class="btn" type="button" value="cancel"></a>
+
+        </fieldset>
+
+    </form>
+</body>
+</html>
