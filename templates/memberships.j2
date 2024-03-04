@@ -10,7 +10,7 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Members</title>
+    <title>Memberships</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
@@ -27,42 +27,31 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     </nav>
     <br>
     <fieldset>
-        <h2>Members</h2>
+        <h2>Memberships</h2>
         <table>
 <body>
     <table>
         <thead>
             <tr>
-                <th><a href="/add_member" class="btn">Add New Member</a></th>
+                <th><a href="/add_membership" class="btn">Add New Memership</a></th>
                 <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Join Date</th>
-                <th>Birthday</th>
-                <th>Membership</th>
-                <th>Trainer</th>
+                <th>Price</th>
+                <th>Details</th>
             </tr>
         </thead>
         <tbody>
-            {% for member in Members %}
+            {% for membership in Memberships %}
             <tr>
                 <td>
             
-                <a href='/edit_member/{{ member.ID }}'><input class="btn" type="button" value="Edit"></a>
-                <a href='/delete_member/{{ member.ID }}'><input class="btn" type="button" value="Delete"></a>
+                <a href='/edit_membership/{{ membership.ID }}'><input class="btn" type="button" value="Edit"></a>
+                <a href='/delete_membership/{{ membership.ID }}'><input class="btn" type="button" value="Delete"></a>
 
                 </td>
-                <td>{{ member['ID'] }}</td>
-                <td>{{ member['First Name'] }}</td>
-                <td>{{ member['Last Name'] }}</td>
-                <td>{{ member['Phone Number'] }}</td>
-                <td>{{ member['Email'] }}</td>
-                <td>{{ member['Join Date'] }}</td>
-                <td>{{ member['Birthday'] }}</td>
-                <td>{{ member['Membership'] }}</td>
-                <td>{{ member['Trainer'] }}</td>
+                <td>{{ membership['ID'] }}</td>
+                <td>{{ membership['Price'] }}</td>
+                <td>{{ membership['Details'] }}</td>
+
             </tr>
             {% endfor %}
         </tbody>

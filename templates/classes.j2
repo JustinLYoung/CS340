@@ -10,7 +10,7 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Members</title>
+    <title>Classes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
@@ -27,41 +27,31 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     </nav>
     <br>
     <fieldset>
-        <h2>Members</h2>
+        <h2>Classes</h2>
         <table>
 <body>
     <table>
         <thead>
             <tr>
-                <th><a href="/add_member" class="btn">Add New Member</a></th>
+                <th><a href="/add_class" class="btn">Add New Class</a></th>
                 <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Join Date</th>
-                <th>Birthday</th>
-                <th>Membership</th>
+                <th>Class Type</th>
+                <th>Schedule</th>
                 <th>Trainer</th>
             </tr>
         </thead>
         <tbody>
-            {% for member in Members %}
+            {% for class in Classes %}
             <tr>
                 <td>
             
-                <a href='/edit_member/{{ member.ID }}'><input class="btn" type="button" value="Edit"></a>
-                <a href='/delete_member/{{ member.ID }}'><input class="btn" type="button" value="Delete"></a>
+                <a href='/edit_class/{{ class.ID }}'><input class="btn" type="button" value="Edit"></a>
+                <a href='/delete_class/{{ class.ID }}'><input class="btn" type="button" value="Delete"></a>
 
                 </td>
-                <td>{{ member['ID'] }}</td>
-                <td>{{ member['First Name'] }}</td>
-                <td>{{ member['Last Name'] }}</td>
-                <td>{{ member['Phone Number'] }}</td>
-                <td>{{ member['Email'] }}</td>
-                <td>{{ member['Join Date'] }}</td>
-                <td>{{ member['Birthday'] }}</td>
-                <td>{{ member['Membership'] }}</td>
+                <td>{{ class['ID'] }}</td>
+                <td>{{ class['Class Type'] }}</td>
+                <td>{{ class['Schedule'] }}</td>
                 <td>{{ member['Trainer'] }}</td>
             </tr>
             {% endfor %}
