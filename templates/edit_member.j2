@@ -29,23 +29,18 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
                     
                     <label for="firstName">First Name:</label>
                     <input type="text" name="firstName" id="firstName" value="{{ member.firstName }}" required>
-                    {# <input type="text" value="{{data[0].firstName}}" class="form-control" id="firstName" name="firstName" pattern="[A-Za-z]{1,}" required> #}
                     
                     <label for="lastName">Last Name:</label>
                     <input type="text" name="lastName" id="lastName" value="{{ member.lastName }}" required>
-                    {# <input type="text" value="{{data[0].lastName}}" class="form-control" id="lastName" name="lastName" pattern="[A-Za-z0-9]{1,}" required> #}
                     
                     <label for="phoneNumber">Phone Number</label>
                     <input type="text" name="phoneNumber" id="phoneNumber" value="{{ member.phoneNumber }}" required>
-                    {# <input type="text" value="{{data[0].phoneNumber}}" class="form-control" id="phoneNumber" name="phoneNumber" pattern="[A-Za-z]{1,}" required> #}
                     
                     <label for="email">Email:</label>
                     <input type="email" name="email" id="email" value="{{ member.email }}" required>
-                    {# <input type="date" value="{{data[0].email}}" class="form-control" id="email" name="email" pattern="[A-Za-z0-9]{1,}" required> #}
                     
                     <label for="joinDate">Join Date</label>
                     <input type="date" name="joinDate" id="joinDate" value="{{ member.joinDate }}" required>
-                    {# <input type="date" value="{{data[0].joinDate}}" class="form-control" id="joinDate" name="joinDate" pattern="[A-Za-z0-9]{1,}" required> #}
                     
                     <label for="birthday">Birthday</label>
                     <input type="date" name="birthday" id="birthday" value="{{ member.birthday }}" required>
@@ -66,7 +61,6 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
                         {% for trainer in trainers %}
                         <!-- If the value iterated trainer matches the value of the trainer of member currently Editing, pre-select that option -->
                             <option value="{{ trainer.trainerID }}" {% if trainer.trainerID == trainer.trainerID %} selected {% endif %}>
-                        {# {{ trainer.trainerID, Trainer.firstName, trainer.lastName }}  #}
                             {{ trainer.trainerID }} 
                             </option>
                         <!-- End of this for loop -->

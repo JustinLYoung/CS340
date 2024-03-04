@@ -12,15 +12,18 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Members</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-
-    {# <link rel='stylesheet' type='text/css' media='screen' href='main.css'> #}
 </head>
 <body>
     <header>
         <h1>Elite Fitness Gym</h1>
     </header>
     <nav>
-        <a href="/members">Members</a> 
+        <a href="index.js">Home</a> 
+        <a href="members.js">Members</a> 
+        <a href="memberships.js">Memberships</a> 
+        <a href="trainers.js">Trainers</a> 
+        <a href="classes.js">Classes</a> 
+        <a href="members_classes.js">MemberClasses</a>
     </nav>
     <br>
     <fieldset>
@@ -46,18 +49,10 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
             {% for member in Members %}
             <tr>
                 <td>
-                
-                    {# <a href="/edit_member" class="btn">Edit</a> #}
-                {# <a href="/edit_member/{{ member.id }}">Edit</a> #}
-                {# <a href="/edit_member/{{ member.ID }}">Edit</a> #}
-                {# <a href="/delete_member/{{ member.ID }}">Delete</a> #}
+            
                 <a href='/edit_member/{{ member.ID }}'><input class="btn" type="button" value="Edit"></a>
                 <a href='/delete_member/{{ member.ID }}'><input class="btn" type="button" value="Delete"></a>
 
-                {# <a href="/delete_member/{{ member.id }}">Delete</a> #}
-
-
-                    {# <a href="/delete_member" class="btn">Delete</a> #}
                 </td>
                 <td>{{ member['ID'] }}</td>
                 <td>{{ member['First Name'] }}</td>
