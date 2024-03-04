@@ -14,7 +14,7 @@
     </header>
     <nav>
         <a href="index.html">Home</a> 
-        <a href="members.html">Members</a> 
+        <a href="members.j2">Members</a> 
         <a href="memberships.html">Memberships</a> 
         <a href="trainers.html">Trainers</a> 
         <a href="classes.html">Classes</a> 
@@ -27,15 +27,15 @@
             <thead>
                 <tr>
                     <th><button>New Member</button></th>
-                    <th>Members ID</th>
+                    <th>ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Number</th>
+                    <th>Phone Number</th>
                     <th>Email</th>
                     <th>Join Date</th>
                     <th>Birthday</th>
-                    <th>Membership ID</th>
-                    <th>Trainer ID</th>
+                    <th>Membership</th>
+                    <th>Trainer</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,7 +52,7 @@
                     <td>2021-03-19</td>
                     <td>2004-09-12</td>
                     <td>Gold</td>
-                    <td>9001</td>
+                    <td>Logan Cordova</td>
                 </tr>
                 <tr>
                     <td>
@@ -67,7 +67,7 @@
                     <td>2021-03-19</td>
                     <td>2002-07-28</td>
                     <td>Diamond</td>
-                    <td>9001</td>
+                    <td>Logan Cordova</td>
                 </tr>
                 <tr>
                     <td>
@@ -97,7 +97,7 @@
                     <td>2021-05-03</td>
                     <td>1975-04-10</td>
                     <td>Platinum</td>
-                    <td>9004</td>
+                    <td>Mia Maddox</td>
                 </tr>
                 <tr>
                     <td>
@@ -112,7 +112,7 @@
                     <td>2021-05-03</td>
                     <td>1989-07-17</td>
                     <td>Diamond</td>
-                    <td>9003</td>
+                    <td>Alyson Sherman</td>
                 </tr>
             </tbody>
         </table>
@@ -126,7 +126,7 @@
         <label for="lastName">Last Name</label>
         <input type="text" name="lastName" id="lastName" size="8" maxlength="45"/>
         <br>
-        <label for="phoneNumber">Number</label>
+        <label for="phoneNumber">Phone Number</label>
         <input type="tel" name="phoneNumber" id="phoneNumber" size="8" maxlength="45"/>
         <br>
         <label for="email">Email</label>
@@ -138,21 +138,20 @@
         <label for="birthday">Birthday</label>
         <input type="text" name="birthday" id="birthday" size="8" maxlength="45"/>
         <br>
-        <label for="membershipID">Membership ID</label>
+        <label for="membershipID">Membership</label>
         <select name="membershipID" id="membershipID">
             <option value="Gold">Gold</option>
             <option value="Platinum">Platinum</option>
             <option value="Diamond">Diamond</option>
         </select>
         <br>
-        <label for="trainerID">Trainer ID</label>
+        <label for="trainerID">Trainer</label>
         <select name="trainerID" id="trainerID">
-            <option value="9000">9000</option>
-            <option value="9001">9001</option>
-            <option value="9002">9002</option>
-            <option value="9003">9003</option>
-            <option value="9004">9004</option>
-            <option value="9005">9005</option>
+            <option value="9000">Billy Decker</option>
+            <option value="9001">Logan Cordova</option>
+            <option value="9002">Ethen Pollard</option>
+            <option value="9003">Alyson Sherman</option>
+            <option value="9004">Mia Maddox</option>
             <option value="None">None</option>
         </select>
         <br><br>
@@ -179,21 +178,20 @@
         <label for="birthday">Birthday</label>
         <input type="text" name="birthday" id="birthday" value="2004-09-12" size="20" maxlength="45"/>
         <br>
-        <label for="membershipID">Membership ID</label>
+        <label for="membershipID">Membership</label>
         <select name="membershipID" id="membershipID">
             <option value="Gold">Gold</option>
             <option value="Platinum">Platinum</option>
             <option value="Diamond">Diamond</option>
         </select>
         <br>
-        <label for="trainerID">Trainer ID</label>
+        <label for="trainerID">Trainer</label>
         <select name="trainerID" id="trainerID">
-            <option value="9000">9000</option>
-            <option value="9001">9001</option>
-            <option value="9002">9002</option>
-            <option value="9003">9003</option>
-            <option value="9004">9004</option>
-            <option value="9005">9005</option>
+            <option value="9000">Billy Decker</option>
+            <option value="9001">Logan Cordova</option>
+            <option value="9002">Ethen Pollard</option>
+            <option value="9003">Alyson Sherman</option>
+            <option value="9004">Mia Maddox</option>
             <option value="None">None</option>
           </select>
           <br><br>
