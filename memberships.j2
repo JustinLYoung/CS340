@@ -1,0 +1,60 @@
+{# 
+-- Citation for code to create the members jinja2 file layout and populated table
+-- Date: 2/27/24
+-- Based on OSU Flask Starter App GitHub: 
+https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/templates/edit_people.j2
+#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memberships</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Elite Fitness Gym</h1>
+    </header>
+    <nav>
+        <a href="index.js">Home</a> 
+        <a href="members.js">Members</a> 
+        <a href="memberships.js">Memberships</a> 
+        <a href="trainers.js">Trainers</a> 
+        <a href="classes.js">Classes</a> 
+        <a href="members_classes.js">MemberClasses</a>
+    </nav>
+    <br>
+    <fieldset>
+        <h2>Memberships</h2>
+        <table>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th><a href="/add_membership" class="btn">Add New Memership</a></th>
+                <th>ID</th>
+                <th>Price</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for membership in Memberships %}
+            <tr>
+                <td>
+            
+                <a href='/edit_membership/{{ membership.ID }}'><input class="btn" type="button" value="Edit"></a>
+                <a href='/delete_membership/{{ membership.ID }}'><input class="btn" type="button" value="Delete"></a>
+
+                </td>
+                <td>{{ membership['ID'] }}</td>
+                <td>{{ membership['Price'] }}</td>
+                <td>{{ membership['Details'] }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
