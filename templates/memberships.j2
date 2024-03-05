@@ -11,7 +11,7 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memberships</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/css/main.css'>
 </head>
 <body>
     <header>
@@ -33,7 +33,10 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     <table>
         <thead>
             <tr>
-                <th><a href="/add_membership" class="btn">Add New Memership</a></th>
+                <th>
+                <a href="/add_membership"></a> <input class="btn" type="button" value="Add New Membership"></a>
+                </th>
+                
                 <th>ID</th>
                 <th>Price</th>
                 <th>Details</th>

@@ -33,7 +33,10 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     <table>
         <thead>
             <tr>
-                <th><a href="/add_member" class="btn">Add New Member</a></th>
+                <th>
+                <a href="/add_member"></a> <input class="btn" type="button" value="Add New Member"></a>
+                </th>
+
                 <th>ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -49,7 +52,6 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
             {% for member in Members %}
             <tr>
                 <td>
-            
             
                 <a href='/edit_member/{{ member.ID }}'><input class="btn" type="button" value="Edit"></a>
                 <a href='/delete_member/{{ member.ID }}'><input class="btn" type="button" value="Delete"></a>

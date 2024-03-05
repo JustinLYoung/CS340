@@ -33,9 +33,11 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     <table>
         <thead>
             <tr>
-                <th><a href="/add_class" class="btn">Add New Class</a></th>
+                <th>
+                <a href="/add_class"></a> <input class="btn" type="button" value="Add New Class"></a>
+                </th>
                 <th>ID</th>
-                <th>Class Type</th>
+                <th>Type</th>
                 <th>Schedule</th>
                 <th>Trainer</th>
             </tr>
@@ -50,9 +52,9 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
 
                 </td>
                 <td>{{ class['ID'] }}</td>
-                <td>{{ class['Class Type'] }}</td>
+                <td>{{ class['Type'] }}</td>
                 <td>{{ class['Schedule'] }}</td>
-                <td>{{ member['Trainer'] }}</td>
+                <td>{{ class['Trainer'] }}</td>
             </tr>
             {% endfor %}
         </tbody>
