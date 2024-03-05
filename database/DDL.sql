@@ -28,7 +28,7 @@ VALUES
 ('Alyson', 'Sherman'),
 ('Mia', 'Maddox');
 
--- Drop Memberhips table if the table exists.
+-- Drop Memberships table if the table exists.
 DROP TABLE IF EXISTS Memberships;
 -- Create new table called Memberships with membershipID as primary key.
 CREATE TABLE Memberships (

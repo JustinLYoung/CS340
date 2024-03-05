@@ -17,7 +17,7 @@ db_connection = db.connect_to_database()
 
 # Routes
 
-@app.route("/") #changed this from so this will be the first page that will be displayed
+@app.route("/") #changed this from /index so it will be the first page that will be displayed with our url
 def home_page():
     return render_template("index.j2")
 
@@ -29,25 +29,21 @@ def home_page():
 # def classes_page():
 #     return render_template("classes.j2")
 
+# ------------------------------- Trainers Page ------------------------------
+
 @app.route("/trainers")
 def trainers_page():
     return render_template("trainers.j2")
 
-@app.route("/memberships")
-def memberships_page():
-    return render_template("memberships.j2")
+# @app.route("/memberships")
+# def memberships_page():
+#     return render_template("memberships.j2")
 
-@app.route("/members_classes")
-def members_classes_page():
-    return render_template("members_classes.j2")
-
-# @app.route("/")
-# def home():
-#     return get_members()
+# ------------------------------- Members Page -------------------------------
 
 # add and organize data to be displayed on the Members table
 @app.route('/members')
-def get_members():
+def members_page():
     query = """
     SELECT 
     Members.memberID AS 'ID',
@@ -67,13 +63,13 @@ def get_members():
     results = cursor.fetchall()
     return render_template("members.j2", Members=results);
 
-# -- Citation for code to create the get_add_member_form method and populated table
+# -- Citation for code to create the get_add_member method and populated table
 # -- Date: 2/27/24
 # -- Based on OSU Flask Starter App GitHub: 
 # https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
 
 @app.route("/add_member", methods=["GET"])
-def get_add_member_form():
+def get_add_member():
 
     # query to populate dropdown menu for trainer
     trainers_query = "SELECT trainerID, CONCAT(firstName, ' ', lastName) AS Trainer FROM Trainers;"
@@ -282,13 +278,77 @@ def edit_member(memberID):
 
     return redirect("/members")
 
-@app.route("/classes")
-def classes_page():
-   return get_classes()
+# ------------------------------ Memberships Page ----------------------------
 
+@app.route("/memberships")
+# add and organize data to be displayed on the Memberships table
+def memberships_page():
+   query = """
+   SELECT
+   Memberships.membershipID AS 'ID',
+   Memberships.price AS 'Price',
+   Memberships.details AS 'Details'
+   FROM Memberships; 
+   """
+   cursor = db.execute_query(db_connection=db_connection, query=query)
+   results = cursor.fetchall()
+   return render_template("memberships.j2", Memberships=results);
+
+# -- Citation for code to create the get_add_member method and populated table
+# -- Date: 2/27/24
+# -- Based on OSU Flask Starter App GitHub:
+# https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
+
+@app.route("/add_membership", methods=["GET"])
+def get_add_membership():  
+  
+   # render add_membership form passing our fetched trainers details to the template
+   return render_template("add_membership.j2")
+
+# -- Citation for code to create the add_class method and populated table
+# -- Date: 2/27/24
+# -- Based on OSU Flask Starter App GitHub:
+# https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
+
+@app.route("/add_membership", methods=["POST"])
+# adds a membership into the Membership table
+def add_membership():
+   if request.method == "POST":
+       # grab user form inputs
+       membershipID = request.form.get("membershipID")
+       price = request.form.get("price")
+       details = request.form.get("details")
+
+       # query to insert a new membership
+       query = """
+           INSERT INTO Memberships (
+               membershipID,
+               price,
+               details
+       )
+       VALUES (%s, %s, %s)
+       """
+       data = (
+           membershipID,
+           price,
+           details,
+       )
+       
+       # set up cursor to pass through data and commit
+       db.execute_query(db_connection = db_connection, query = query, query_params = (data))
+       cursor = db_connection.cursor()
+       db_connection.commit()
+       cursor.close()
+
+   # redirect back to memberships page
+   return redirect("/memberships")
+
+
+# ------------------------------- Classes Page -------------------------------
+
+@app.route("/classes")
 # add and organize data to be displayed on the Classes table
-@app.route('/classes')
-def get_classes():
+def classes_page():
    query = """
    SELECT
    Classes.classID AS 'ID',
@@ -303,13 +363,13 @@ def get_classes():
    results = cursor.fetchall()
    return render_template("classes.j2", Classes=results);
 
-# -- Citation for code to create the get_add_member_form method and populated table
+# -- Citation for code to create the get_add_class method and populated table
 # -- Date: 2/27/24
 # -- Based on OSU Flask Starter App GitHub:
 # https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
 
 @app.route("/add_class", methods=["GET"])
-def get_add_class_form():
+def get_add_class():
 
    # query to populate dropdown menu for trainer
    trainers_query = "SELECT trainerID, CONCAT(firstName, ' ', lastName) AS Trainer FROM Trainers;"
@@ -372,6 +432,29 @@ def add_class():
 
    # redirect back to members page
    return redirect("/classes")
+
+
+# ----------------------------- MemberClasses Page ---------------------------
+# @app.route("/members_classes")
+# def members_classes_page():
+#    return get_member_classes_page()
+
+# add and organize data to be displayed on the Classes table
+# @app.route('/members_classes')
+# def get_member_classes_page():
+#    query = """
+#    SELECT
+#    Classes.classID AS 'ID',
+#    Classes.classType AS 'Type',
+#    Classes.schedule AS 'Schedule', 
+#    CONCAT(Trainers.firstName, ' ', Trainers.lastName) AS 'Trainer'
+#    FROM Classes
+#    LEFT JOIN Trainers
+#    ON Classes.trainerID = Trainers.trainerID;
+#    """
+#    cursor = db.execute_query(db_connection=db_connection, query=query)
+#    results = cursor.fetchall()
+#    return render_template("classes.j2", Classes=results);
 
 # Listener
 if __name__ == "__main__":
