@@ -13,6 +13,14 @@ import database.db_connector as db
 app = Flask(__name__)
 db_connection = db.connect_to_database()
 
+# MySQL configurations
+app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
+app.config['MYSQL_USER'] = 'cs340_youngj9'
+app.config['MYSQL_PASSWORD'] = '2754'
+app.config['MYSQL_DB'] = 'DictCursor'
+
+mysql = MySQL(app)
+
 # Routes
 
 @app.route("/")
