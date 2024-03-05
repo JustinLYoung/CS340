@@ -32,12 +32,9 @@ def memberships():
 def members_classes():
     return render_template("members_classes.j2")
 
-
-
-
-@app.route("/")
-def home():
-    return get_members()
+# @app.route("/")
+# def home():
+#     return get_members()
 
 # add and organize data to be displayed on the Members table
 @app.route('/members')
