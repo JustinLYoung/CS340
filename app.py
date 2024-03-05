@@ -16,20 +16,29 @@ app = Flask(__name__)
 db_connection = db.connect_to_database()
 
 # Routes
-@app.route("/index")
-def index():
+
+@app.route("/") #changed this from so this will be the first page that will be displayed
+def home_page():
     return render_template("index.j2")
 
+# @app.route("/index")
+# def index():
+    # return render_template("index.j2")
+
 @app.route("/classes")
-def classes():
+def classes_page():
+    return render_template("classes.j2")
+
+@app.route("/trainers")
+def trainers_page():
     return render_template("classes.j2")
 
 @app.route("/memberships")
-def memberships():
+def memberships_page():
     return render_template("memberships.j2")
 
 @app.route("/members_classes")
-def members_classes():
+def members_classes_page():
     return render_template("members_classes.j2")
 
 # @app.route("/")
@@ -264,14 +273,6 @@ def edit_member(memberID):
                 trainerID is None
             WHERE memberID = %s;
             """
-
-        # # set up cursor to pass through data and commit
-        # db.execute_query(db_connection = db_connection, query = query, query_params = (data))
-        # cursor = db_connection.cursor()
-
-        # cursor.execute(query, data)
-        # db_connection.commit()
-        # cursor.close()
 
         # execute the query
         cursor = db_connection.cursor()
