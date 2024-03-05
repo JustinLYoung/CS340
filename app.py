@@ -19,7 +19,7 @@ db_connection = db.connect_to_database()
 def home():
     return get_members()
 
-# add and organize data to be displayed on the members table
+# add and organize data to be displayed on the Members table
 @app.route('/members')
 def get_members():
     query = """
@@ -263,6 +263,99 @@ def edit_member(memberID):
         cursor.close()
 
     return redirect("/members")
+
+# ------------------------- Classes Page ------------------------- 
+
+@app.route("/classes")
+def classes_page():
+    return get_classes()
+
+# add and organize data to be displayed on the Classes table
+@app.route('/classes')
+def get_classes():
+    query = """
+    SELECT 
+    Classes.classID AS 'ID',
+    Classes.classType AS 'Class Type',
+    Classes.schedule AS 'Schedule',  
+    CONCAT(Trainers.firstName, ' ', Trainers.lastName) AS 'Trainer'
+    FROM Classes
+    LEFT JOIN Trainers 
+    ON Classes.trainerID = Trainers.trainerID;
+    """
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("classes.j2", Classes=results);
+
+# -- Citation for code to create the get_add_member_form method and populated table
+# -- Date: 2/27/24
+# -- Based on OSU Flask Starter App GitHub: 
+# https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
+
+@app.route("/add_class", methods=["GET"])
+def get_add_class_form():
+
+    # query to populate dropdown menu for trainer
+    trainers_query = "SELECT trainerID, CONCAT(firstName, ' ', lastName) AS Trainer FROM Trainers;"
+    cursor = db.execute_query(db_connection=db_connection, query=trainers_query)
+    trainers = cursor.fetchall()        
+    
+    # render add_class form passing our fetched trainers details to the template 
+    return render_template("add_class.j2", trainers=trainers)
+
+# -- Citation for code to create the add_class method and populated table
+# -- Date: 2/27/24
+# -- Based on OSU Flask Starter App GitHub: 
+# https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
+
+@app.route("/add_class", methods=["POST"])
+# adds a member into the Classes table
+def add_class():
+    if request.method == "POST":
+        # grab user form inputs
+        classType = request.form.get("classType")
+        schedule = request.form.get("schedule")
+        trainerID = request.form.get("trainerID", None)
+
+        # query to insert a new class
+        query = """
+            INSERT INTO Classes (
+                classType, 
+                schedule, 
+                trainerID
+        )
+        VALUES (%s, %s, %s)
+        """
+        data = (
+            classType, 
+            schedule, 
+            trainerID, 
+        )
+
+        # query to enter a new member that does not have a trainer
+        if not trainerID:  
+            query = """
+            INSERT INTO Classes (
+                classType, 
+                schedule, 
+                trainerID
+            )
+            VALUES (%s, %s, %s)
+            """
+            data = (
+                classType, 
+                schedule, 
+                trainerID 
+            )
+
+        # set up cursor to pass through data and commit
+        db.execute_query(db_connection = db_connection, query = query, query_params = (data))
+        cursor = db_connection.cursor()
+        db_connection.commit()
+        cursor.close()
+
+    # redirect back to members page
+    return redirect("/classes")
 
 # Listener
 if __name__ == "__main__":
