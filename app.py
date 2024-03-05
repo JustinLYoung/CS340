@@ -11,9 +11,37 @@ from flask import Flask, render_template, json, redirect, request
 import database.db_connector as db
 
 app = Flask(__name__)
+
 db_connection = db.connect_to_database()
+# Routes 
+
+app.config["MYSQL_HOST"] = "classmysql.engr.oregonstate.edu"
+app.config["MYSQL_USER"] = "cs340_youngj9"
+app.config["MYSQL_PASSWORD"] = "2754"
+app.config["MYSQL_DB"] = "cs340_youngj9"
+app.config["MYSQL_CURSORCLASS"] = "DictCursor"
+
+mysql = MySQL(app)
 
 # Routes
+@app.route("/index")
+def index():
+    return render_template("index.j2")
+
+@app.route("/classes")
+def classes():
+    return render_template("classes.j2")
+
+@app.route("/memberships")
+def memberships():
+    return render_template("memberships.j2")
+
+@app.route("/members_classes")
+def members_classes():
+    return render_template("members_classes.j2")
+
+
+
 
 @app.route("/")
 def home():
@@ -353,4 +381,4 @@ def edit_trainers(id):
 if __name__ == "__main__":
 
     #Start the app on port 3000, it will be different once hosted
-    app.run(port=3000, debug=True)
+    app.run(port=31311, debug=True)
