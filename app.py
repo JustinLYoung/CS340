@@ -10,6 +10,7 @@ from flask import Flask, render_template, json, redirect, request
 
 import database.db_connector as db
 
+
 app = Flask(__name__)
 
 db_connection = db.connect_to_database()
@@ -321,7 +322,7 @@ def trainers():
     # Grab bsg_people data so we send it to our template to display
     if request.method == "GET":
         # mySQL query to grab all the people in bsg_people
-        query = "SELECT * FROM Trainers;"
+        query = "SELECT trainerID AS 'ID', firstName AS 'First Name', lastName AS 'Last Name' FROM Trainers;"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
