@@ -28,7 +28,7 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
 
             <label for="trainerID">Trainer</label>
             <select name="trainerID" id="trainerID">
-                <option value="">None</option>
+                {# <option value="">None</option> #}
                 {% for trainer in trainers %}
                 <option value="{{ trainer.trainerID }}">{{ trainer.Trainer }}</option>
                 {% endfor %}

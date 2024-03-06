@@ -58,7 +58,7 @@ CREATE TABLE Members (
     joinDate DATE NOT NULL,
     birthday DATE NOT NULL,
     membershipID VARCHAR(45) NOT NULL,
-    trainerID INT,
+    trainerID INT NULL,
     PRIMARY KEY(memberID),
     FOREIGN KEY(membershipID) REFERENCES Memberships(membershipID)
     ON DELETE CASCADE,

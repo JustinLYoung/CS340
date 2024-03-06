@@ -18,8 +18,7 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     </header>
     <div id="edit">
         <!-- form to edit data in Classes Page-->
-        <form id="editClass" action="/edit_class/{{ class.classID }}" method="POST">
-            {# <legend><strong>Edit a Member</strong></legend> #}
+        <form id="editClass" action="/edit_class/{{ classes.classID }}" method="POST">
             <fieldset>
 
                 <legend>Class Details</legend>
@@ -28,15 +27,15 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
                     <!-- Create hidden form input to store the passed 'id' of the person we are editing so we can access it easily in our 'POST' method in our app.py -->
                     <input type="hidden" value="{{classes.classID}}" class="form-control" id="classID" name="classID" required>
                     
-                    <label for="classType">Class Type:</label>
+                    <label for="classType">Type:</label>
                     <input type="text" name="classType" id="classType" value="{{ classes.classType }}" required>
                     
-                    <label for="schedule">schedule:</label>
+                    <label for="schedule">Schedule:</label>
                     <input type="text" name="schedule" id="schedule" value="{{ classes.schedule }}" required>
 
                     <label for="trainerID">Trainer:</label>
                     <select name="trainerID" id="trainerID" required>
-                        <option value="">None</option>
+                        {# <option value="">None</option> #}
                         {% for trainer in trainers %}
                         <!-- If the value iterated trainer matches the value of the trainer of member currently Editing, pre-select that option -->
                             <option value="{{ trainer.trainerID }}" {% if trainer.trainerID == trainer.trainerID %} selected {% endif %}>
@@ -47,7 +46,7 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
                     </select>
             </fieldset>
                 <input type="submit" value="Edit Class" name="Edit Class" class="btn btn-primary" style="margin:.5rem;">
-                <a href='/members'><input class="btn" type="button" value="cancel"></a>
+                <a href='/classes'><input class="btn" type="button" value="cancel"></a>
         </form>
 
 </html>
