@@ -25,19 +25,11 @@ def home_page():
 # def index():
     # return render_template("index.j2")
 
-# @app.route("/classes")
-# def classes_page():
-#     return render_template("classes.j2")
-
 # ------------------------------- Trainers Page ------------------------------
 
 @app.route("/trainers")
 def trainers_page():
     return render_template("trainers.j2")
-
-# @app.route("/memberships")
-# def memberships_page():
-#     return render_template("memberships.j2")
 
 # ------------------------------- Members Page -------------------------------
 
@@ -198,7 +190,7 @@ def get_edit_member(memberID):
     memberships_query = "SELECT membershipID FROM Memberships;"
     cursor = db.execute_query(db_connection=db_connection, query=memberships_query)
     memberships = cursor.fetchall()
-    cursor.close()
+    # cursor.close()
 
     # query to get member's data to pre-populate the form
     member_query = "SELECT * FROM Members WHERE memberID = %s;"
@@ -267,10 +259,14 @@ def edit_member(memberID):
             WHERE memberID = %s;
             """
 
-        # execute the query
-        cursor = db_connection.cursor()
-        cursor.execute(query, data)
-        db_connection.commit()
+        # # execute the query
+        # cursor = db_connection.cursor()
+        # cursor.execute(query, data)
+        # db_connection.commit()
+        # cursor.close()
+            
+        # set up cursor to pass through data and commit
+        cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (*data,))
         cursor.close()
 
     return redirect("/members")
@@ -352,16 +348,10 @@ def delete_membership(id):
 
     # query to delete a member with our passed id
     query = "DELETE FROM Memberships WHERE membershipID = %s;"
-    try:
-        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(id,))
-    except Exception as e:
-        print(f"Error executing query: {e}")
-        # Handle the error or log it
-    finally:
-        cursor.close()
-    # # set up cursor to pass through data and commit
-    # cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (id,))
-    # cursor.close()
+
+    # set up cursor to pass through data and commit
+    cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (id,))
+    cursor.close()
     
     # redirect back to memberships page
     return redirect("/memberships")
@@ -617,22 +607,6 @@ def edit_class(classID):
 # def members_classes_page():
 #    return get_member_classes_page()
 
-# add and organize data to be displayed on the Classes table
-# @app.route('/members_classes')
-# def get_member_classes_page():
-#    query = """
-#    SELECT
-#    Classes.classID AS 'ID',
-#    Classes.classType AS 'Type',
-#    Classes.schedule AS 'Schedule', 
-#    CONCAT(Trainers.firstName, ' ', Trainers.lastName) AS 'Trainer'
-#    FROM Classes
-#    LEFT JOIN Trainers
-#    ON Classes.trainerID = Trainers.trainerID;
-#    """
-#    cursor = db.execute_query(db_connection=db_connection, query=query)
-#    results = cursor.fetchall()
-#    return render_template("classes.j2", Classes=results);
 
 # Listener
 if __name__ == "__main__":
