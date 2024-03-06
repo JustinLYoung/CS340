@@ -154,9 +154,7 @@ def add_member():
             )
 
         # set up cursor to pass through data and commit
-        db.execute_query(db_connection = db_connection, query = query, query_params = (data))
-        cursor = db_connection.cursor()
-        db_connection.commit()
+        cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (data))
         cursor.close()
 
     # redirect back to members page
@@ -175,9 +173,8 @@ def delete_member(id):
     # query to delete a member with our passed id
     query = "DELETE FROM Members WHERE memberID = %s;"
 
-    cursor = db_connection.cursor()
-    cursor.execute(query, (id,))
-    db_connection.commit()
+    # set up cursor to pass through data and commit
+    cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (id,))
     cursor.close()
     
     # redirect back to members page
@@ -201,7 +198,7 @@ def get_edit_member(memberID):
     memberships_query = "SELECT membershipID FROM Memberships;"
     cursor = db.execute_query(db_connection=db_connection, query=memberships_query)
     memberships = cursor.fetchall()
-    # cursor.close()
+    cursor.close()
 
     # query to get member's data to pre-populate the form
     member_query = "SELECT * FROM Members WHERE memberID = %s;"
@@ -283,16 +280,17 @@ def edit_member(memberID):
 @app.route("/memberships")
 # add and organize data to be displayed on the Memberships table
 def memberships_page():
-   query = """
-   SELECT
-   Memberships.membershipID AS 'ID',
-   Memberships.price AS 'Price',
-   Memberships.details AS 'Details'
-   FROM Memberships; 
-   """
-   cursor = db.execute_query(db_connection=db_connection, query=query)
-   results = cursor.fetchall()
-   return render_template("memberships.j2", Memberships=results);
+    query = """
+    SELECT
+    Memberships.membershipID AS 'ID',
+    Memberships.price AS 'Price',
+    Memberships.details AS 'Details'
+    FROM Memberships; 
+    """
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+
+    return render_template("memberships.j2", Memberships=results);
 
 # -- Citation for code to create the get_add_member method and populated table
 # -- Date: 2/27/24
@@ -302,8 +300,8 @@ def memberships_page():
 @app.route("/add_membership", methods=["GET"])
 def get_add_membership():  
   
-   # render add_membership form passing our fetched trainers details to the template
-   return render_template("add_membership.j2")
+    # render add_membership form passing our fetched trainers details to the template
+    return render_template("add_membership.j2")
 
 # -- Citation for code to create the add_class method and populated table
 # -- Date: 2/27/24
@@ -311,70 +309,87 @@ def get_add_membership():
 # https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
 
 @app.route("/add_membership", methods=["POST"])
-# adds a membership into the Membership table
+# adds a member into the Classes table
 def add_membership():
-   if request.method == "POST":
-       # grab user form inputs
-       membershipID = request.form.get("membershipID")
-       price = request.form.get("price")
-       details = request.form.get("details")
+    if request.method == "POST":
+        # grab user form inputs
+        membershipID = request.form.get("membershipID")
+        price = request.form.get("price")
+        details = request.form.get("details", None)
 
-       # query to insert a new membership
-       query = """
-           INSERT INTO Memberships (
-               membershipID,
-               price,
-               details
-       )
-       VALUES (%s, %s, %s)
-       """
-       data = (
-           membershipID,
-           price,
-           details,
-       )
+        # query to insert a new Membe
+        query = """
+            INSERT INTO Memberships (
+                membershipID,
+                price,
+                details
+        )
+        VALUES (%s, %s, %s)
+        """
+        data = (
+            membershipID,
+            price,
+            details,
+        )
        
-       # set up cursor to pass through data and commit
-       db.execute_query(db_connection = db_connection, query = query, query_params = (data))
-       cursor = db_connection.cursor()
-       db_connection.commit()
-       cursor.close()
+        # # set up cursor to pass through data and commit
+        # db.execute_query(db_connection = db_connection, query = query, query_params = (data))
+        # cursor = db_connection.cursor()
+        # db_connection.commit()
+        # cursor.close()
 
-   # redirect back to memberships page
-   return redirect("/memberships")
+        # set up cursor to pass through data and commit
+        cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (data))
+        cursor.close()
 
+    # redirect back to memberships page
+    return redirect("/memberships")
+
+# route for delete functionality, deleting a person from bsg_people,
+# we want to pass the 'id' value of that person on button click (see HTML) via the route
 @app.route("/delete_membership/<int:id>")
 def delete_membership(id):
 
-    # query to delete a membership with our passed id
+    # query to delete a member with our passed id
     query = "DELETE FROM Memberships WHERE membershipID = %s;"
-
-    cursor = db_connection.cursor()
-    cursor.execute(query, (id,))
-    db_connection.commit()
-    cursor.close()
+    try:
+        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(id,))
+    except Exception as e:
+        print(f"Error executing query: {e}")
+        # Handle the error or log it
+    finally:
+        cursor.close()
+    # # set up cursor to pass through data and commit
+    # cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (id,))
+    # cursor.close()
     
     # redirect back to memberships page
     return redirect("/memberships")
 
-# -- Citation for code to create the get_edit_member method to populate the dropdown menus 
+# -- Citation for code to create the get_edit_membership method to populate the dropdown menus 
 # -- Date: 2/27/24
 # -- Based on OSU Flask Starter App GitHub: 
 # https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
 
 @app.route("/edit_membership/<int:membershipID>", methods=["GET"])
-# add and organize data to be displayed on the Edit Member Form
+# add and organize data to be displayed on the Edit Membership Form
 def get_edit_membership(membershipID):
 
-    # query to get member's data to pre-populate the form
+    # # query to populate dropdown menu for trainer
+    # trainers_query = "SELECT trainerID, CONCAT(firstName, ' ', lastName) AS Trainer FROM Trainers;"
+    # cursor = db.execute_query(db_connection=db_connection, query=trainers_query)
+    # trainers = cursor.fetchall()        
+
+    # query to get class's data to pre-populate the form
     membership_query = "SELECT * FROM Memberships WHERE membershipID = %s;"
+    cursor = db.execute_query(db_connection=db_connection, query=membership_query)
     cursor.execute(membership_query, (membershipID,))
     membership = cursor.fetchone()
     
-    # render edit_member form passing our member, trainers, and memberships data to the template 
+    # render edit_membership form passing our class, trainers, and memberships data to the template 
     return render_template("edit_membership.j2", membership=membership)
 
-# -- Citation for code to create the edit_member method and populated table 
+# -- Citation for code to create the edit_membership method and populated table 
 # -- Date: 2/27/24
 # -- Based on OSU Flask Starter App GitHub: 
 # https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
@@ -383,22 +398,22 @@ def get_edit_membership(membershipID):
 def edit_membership(membershipID):
     if request.method == "POST":
         # grab user form inputs
-        membershipID = request.form.get("ID")
-        price = request.form.get("Price")
-        details = request.form.get("Details")
-           
+        membershipID = request.form.get("membershipID")  
+        price = request.form.get("price")
+        details = request.form.get("details")
+
         # data tuple for the query execution
-        data = (membershipID,
-                price,
-                details,
+        data = (
+            price,
+            details, 
+            membershipID    
             )
 
-        # query to update a memberships
+        # query to update a membership
         query = """
         UPDATE Memberships
-        SET membershipID = %s,
-            price = %s,
-            details = %s,
+        SET price = %s,
+            details = %s
         WHERE membershipID = %s;
         """
         
@@ -414,19 +429,21 @@ def edit_membership(membershipID):
 @app.route("/classes")
 # add and organize data to be displayed on the Classes table
 def classes_page():
-   query = """
-   SELECT
-   Classes.classID AS 'ID',
-   Classes.classType AS 'Type',
-   Classes.schedule AS 'Schedule', 
-   CONCAT(Trainers.firstName, ' ', Trainers.lastName) AS 'Trainer'
-   FROM Classes
-   LEFT JOIN Trainers
-   ON Classes.trainerID = Trainers.trainerID;
-   """
-   cursor = db.execute_query(db_connection=db_connection, query=query)
-   results = cursor.fetchall()
-   return render_template("classes.j2", Classes=results);
+    query = """
+    SELECT
+    Classes.classID AS 'ID',
+    Classes.classType AS 'Type',
+    Classes.schedule AS 'Schedule', 
+    CONCAT(Trainers.firstName, ' ', Trainers.lastName) AS 'Trainer'
+    FROM Classes
+    LEFT JOIN Trainers
+    ON Classes.trainerID = Trainers.trainerID;
+    """
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    # db_connection.close()
+
+    return render_template("classes.j2", Classes=results);
 
 # -- Citation for code to create the get_add_class method and populated table
 # -- Date: 2/27/24
@@ -435,14 +452,13 @@ def classes_page():
 
 @app.route("/add_class", methods=["GET"])
 def get_add_class():
-
-   # query to populate dropdown menu for trainer
-   trainers_query = "SELECT trainerID, CONCAT(firstName, ' ', lastName) AS Trainer FROM Trainers;"
-   cursor = db.execute_query(db_connection=db_connection, query=trainers_query)
-   trainers = cursor.fetchall()       
+    # query to populate dropdown menu for trainer
+    trainers_query = "SELECT trainerID, CONCAT(firstName, ' ', lastName) AS Trainer FROM Trainers;"
+    cursor = db.execute_query(db_connection=db_connection, query=trainers_query)
+    trainers = cursor.fetchall()       
   
-   # render add_class form passing our fetched trainers details to the template
-   return render_template("add_class.j2", trainers=trainers)
+    # render add_class form passing our fetched trainers details to the template
+    return render_template("add_class.j2", trainers=trainers)
 
 # -- Citation for code to create the add_class method and populated table
 # -- Date: 2/27/24
@@ -452,53 +468,85 @@ def get_add_class():
 @app.route("/add_class", methods=["POST"])
 # adds a member into the Classes table
 def add_class():
-   if request.method == "POST":
-       # grab user form inputs
-       classType = request.form.get("classType")
-       schedule = request.form.get("schedule")
-       trainerID = request.form.get("trainerID", None) 
+    if request.method == "POST":
+        # grab user form inputs
+        classType = request.form.get("classType")
+        schedule = request.form.get("schedule")
+        trainerID = request.form.get("trainerID", None)
 
-       # query to insert a new class
-       query = """
-           INSERT INTO Classes (
-               classType,
-               schedule,
-               trainerID
-       )
-       VALUES (%s, %s, %s)
-       """
-       data = (
-           classType,
-           schedule,
-           trainerID,
-       )
+        # query to insert a new class
+        query = """
+            INSERT INTO Classes (
+                classType,
+                schedule,
+                trainerID
+        )
+        VALUES (%s, %s, %s)
+        """
+        data = (
+            classType,
+            schedule,
+            trainerID,
+        )
 
-       # query to enter a new class that does not have a trainer
-       if not trainerID: 
-           query = """
-           INSERT INTO Classes (
-               classType,
-               schedule,
-               trainerID
-           )
-           VALUES (%s, %s, %s)
-           """
-           data = (
-               classType,
-               schedule,
-               trainerID
-           )
+        # query to enter a new member that does not have a trainer
+        if not trainerID: 
+            query = """
+            INSERT INTO Classes (
+                classType,
+                schedule,
+                trainerID
+            )
+            VALUES (%s, %s, %s)
+                """
+            data = (
+                classType,
+                schedule,
+                trainerID
+            )
 
-       # set up cursor to pass through data and commit
-       db.execute_query(db_connection = db_connection, query = query, query_params = (data))
-       cursor = db_connection.cursor()
-       db_connection.commit()
-       cursor.close()
+        # set up cursor to pass through data and commit
+        # db.execute_query(db_connection = db_connection, query = query, query_params = (data))
+        # cursor = db_connection.cursor()
+        # db_connection.commit()
+        # cursor.close()
+        # # db_connection.close()
 
-   # redirect back to classes page
-   return redirect("/classes")
+        cursor = db.execute_query(db_connection= db_connection, query=query, query_params= (*data, ))
+        cursor.close()
 
-# -- Citation for code to create the get_edit_class method to populate the dropdown menu 
+
+    # redirect back to members page
+    return redirect("/classes")
+
+# -- Citation for code to create the delete_class method
+# -- Date: 2/27/24
+# -- Based on OSU Flask Starter App GitHub:
+# https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
+
+
+# route for delete functionality, deleting a class from Classes,
+# we want to pass the 'id' value of that class on button click (see HTML) via the route
+@app.route("/delete_class/<int:id>")
+def delete_class(id):
+
+    # query to delete a member with our passed id
+    query = "DELETE FROM Classes WHERE classID = %s;"
+
+    # cursor = db_connection.cursor()
+    # cursor.execute(query, (id,))
+    # db_connection.commit()
+    # cursor.close()
+    # # db_connection.close()
+
+    # set up cursor to pass through data and commit
+    cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (id,))
+    cursor.close()
+
+    # redirect back to classes page
+    return redirect("/classes")
+
+# -- Citation for code to create the get_edit_class method to populate the dropdown menus 
 # -- Date: 2/27/24
 # -- Based on OSU Flask Starter App GitHub: 
 # https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
@@ -507,50 +555,63 @@ def add_class():
 # add and organize data to be displayed on the Edit Class Form
 def get_edit_class(classID):
 
-    # query to populate dropdown menu for trainer
-    trainers_query = "SELECT trainerID, CONCAT(firstName, ' ', lastName) AS Trainer FROM Trainers;"
+    # query to populate dropdown menu for trainers
+    trainers_query = "SELECT trainerID FROM Trainers;"
     cursor = db.execute_query(db_connection=db_connection, query=trainers_query)
-    trainers = cursor.fetchall()        
+    trainers = cursor.fetchall()
 
-    # query to get class data to pre-populate the form
+    # query to get class's data to pre-populate the form
     class_query = "SELECT * FROM Classes WHERE classID = %s;"
     cursor.execute(class_query, (classID,))
     classes = cursor.fetchone()
-    
-    # render edit_class form passing our trainers data to the template 
+
+    cursor.close()
+
+    # render edit_member form passing our class, trainers, and memberships data to the template 
     return render_template("edit_class.j2", classes=classes, trainers=trainers)
 
-# -- Citation for code to create the delete_class method
+# -- Citation for code to create the edit_member method and populated table 
 # -- Date: 2/27/24
 # -- Based on OSU Flask Starter App GitHub: 
 # https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
 
-# route for delete functionality, deleting a class from Classes,
-# we want to pass the 'id' value of that class on button click (see HTML) via the route
-# @app.route("/delete_class/<int:classID>", methods=["POST"])
-# def delete_class(classID):
+@app.route("/edit_class/<int:classID>", methods=["POST"])
+def edit_class(classID):
+    if request.method == "POST":
+        # grab user form inputs
+        # classID = request.form.get("classID")
+        classType = request.form.get("classType")
+        schedule = request.form.get("schedule")
+        trainerID = request.form.get("trainerID")  
+        
+        # data tuple for the query execution
+        data = (
+            classType,
+            schedule, 
+            trainerID, 
+            classID    
+            )
 
-#     # query to delete a member with our passed id
-#     query = "DELETE FROM Classes WHERE classID = %s;"
+        # query to update a class
+        query = """
+        UPDATE Classes
+        SET classType = %s,
+            schedule = %s,
+            trainerID = %s
+        WHERE classID = %s;
+        """
+        
+        # execute the query
+        # cursor = db_connection.cursor()
+        # cursor.execute(query, data)
+        # db_connection.commit()
+        # cursor.close()
 
-#     cursor = db_connection.cursor()
-#     cursor.execute(query, (classID,))
-#     db_connection.commit()
+        # set up cursor to pass through data and commit
+        cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (*data,))
+        cursor.close()
 
-@app.route("/delete_class/<int:id>")
-def delete_class(id):
-
-    # query to delete a class with our passed id
-    query = "DELETE FROM Class WHERE classID = %s;"
-
-    cursor = db_connection.cursor()
-    cursor.execute(query, (id,))
-    db_connection.commit()
-    cursor.close()
-    
-    # redirect back to classes page
     return redirect("/classes")
-
 # ----------------------------- MemberClasses Page ---------------------------
 # @app.route("/members_classes")
 # def members_classes_page():

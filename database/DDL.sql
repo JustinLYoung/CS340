@@ -57,7 +57,7 @@ CREATE TABLE Members (
     email VARCHAR(100) NOT NULL,
     joinDate DATE NOT NULL,
     birthday DATE NOT NULL,
-    membershipID VARCHAR(45) NOT NULL,
+    membershipID VARCHAR(45) NULL,
     trainerID INT NULL,
     PRIMARY KEY(memberID),
     FOREIGN KEY(membershipID) REFERENCES Memberships(membershipID)
@@ -83,7 +83,7 @@ CREATE TABLE Classes (
     classID INT NOT NULL AUTO_INCREMENT UNIQUE,
     classType VARCHAR(45) NOT NULL,
     schedule DATETIME NOT NULL,
-    trainerID INT NOT NULL,
+    trainerID INT NULL,
     PRIMARY KEY(classID),
     FOREIGN KEY(trainerID) REFERENCES Trainers(trainerID)
     ON DELETE CASCADE
@@ -106,11 +106,13 @@ DROP TABLE IF EXISTS MemberClasses;
 -- between Members and Classes.
 CREATE TABLE MemberClasses (
     memberClassesID INT NOT NULL AUTO_INCREMENT UNIQUE,
-    memberID INT NOT NULL,
-    classID INT NOT NULL,
+    memberID INT NULL,
+    classID INT NULL,
     PRIMARY KEY (memberClassesID),
-    FOREIGN KEY (memberID) REFERENCES Members(memberID),
+    FOREIGN KEY (memberID) REFERENCES Members(memberID)
+    ON DELETE CASCADE,
     FOREIGN KEY (classID) REFERENCES Classes(classID)
+    ON DELETE CASCADE
 );
 
 -- Add sample data to Member_Classes.
