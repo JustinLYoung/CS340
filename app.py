@@ -343,7 +343,7 @@ def add_membership():
 
 # route for delete functionality, deleting a person from bsg_people,
 # we want to pass the 'id' value of that person on button click (see HTML) via the route
-@app.route("/delete_membership/<int:id>")
+@app.route("/delete_membership/<string:id>")
 def delete_membership(id):
 
     # query to delete a member with our passed id
@@ -355,36 +355,77 @@ def delete_membership(id):
     
     # redirect back to memberships page
     return redirect("/memberships")
+# TRY THIS:
+# @app.route("/delete_membership", methods=["POST"])
+# def delete_membership():
+#     membership_id = request.form.get('membership_id')
+#     # query to delete a member with our passed id
+#     query = "DELETE FROM Memberships WHERE membershipID = %s;"
+
+#     # set up cursor to pass through data and commit
+#     cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (membership_id,))
+#     cursor.close()
+    
+#     # redirect back to memberships page
+#     return redirect("/memberships")
 
 # -- Citation for code to create the get_edit_membership method to populate the dropdown menus 
 # -- Date: 2/27/24
 # -- Based on OSU Flask Starter App GitHub: 
 # https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
 
-@app.route("/edit_membership/<int:membershipID>", methods=["GET"])
+@app.route("/edit_membership/<membershipID>", methods=["GET"])
 # add and organize data to be displayed on the Edit Membership Form
 def get_edit_membership(membershipID):
+
+    # query to get class's data to pre-populate the form
+    # cursor = db_connection
+    # query = "SELECT * FROM membership WHERE membershipID = %s;"
+    # cursor.execute(membership_query, (membershipID,))
+    # membership = cursor.fetchall()
+    # query = "SELECT * FROM membership WHERE membershipID = %s;"
+    # cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (*membership_query,))
+    # cursor.close()
+
+    #     # query to get member's data to pre-populate the form
+    # member_query = "SELECT * FROM Members WHERE memberID = %s;"
+    # cursor.execute(member_query, (memberID,))
+    # member = cursor.fetchone()
+    # # query to populate dropdown menu for memberships
+    # memberships_query = "SELECT membershipID FROM Memberships;"
+    # cursor = db.execute_query(db_connection=db_connection, query=memberships_query)
+    # memberships = cursor.fetchall()
+    # # cursor.close()
+    
+    # query to get member's data to pre-populate the form
+    membership_query = "SELECT * FROM Memberships WHERE membershipID = %s;"
+    cursor = db.execute_query(db_connection=db_connection, query=membership_query, query_params=(membershipID,))
+    # cursor.execute(membership_query, (membershipID,))
+    membership = cursor.fetchone()
+    
+    # render edit_member form passing our member, trainers, and memberships data to the template 
+    return render_template("edit_membership.j2", membership=membership)
 
     # # query to populate dropdown menu for trainer
     # trainers_query = "SELECT trainerID, CONCAT(firstName, ' ', lastName) AS Trainer FROM Trainers;"
     # cursor = db.execute_query(db_connection=db_connection, query=trainers_query)
     # trainers = cursor.fetchall()        
 
-    # query to get class's data to pre-populate the form
-    membership_query = "SELECT * FROM Memberships WHERE membershipID = %s;"
-    cursor = db.execute_query(db_connection=db_connection, query=membership_query)
-    cursor.execute(membership_query, (membershipID,))
-    membership = cursor.fetchone()
+    # # query to get class's data to pre-populate the form
+    # membership_query = "SELECT * FROM Memberships WHERE membershipID = %s;"
+    # cursor = db.execute_query(db_connection=db_connection, query=membership_query)
+    # cursor.execute(membership_query, (membershipID,))
+    # membership = cursor.fetchone()
     
     # render edit_membership form passing our class, trainers, and memberships data to the template 
-    return render_template("edit_membership.j2", membership=membership)
+    # return render_template("edit_membership.j2", membership=membership)
 
 # -- Citation for code to create the edit_membership method and populated table 
 # -- Date: 2/27/24
 # -- Based on OSU Flask Starter App GitHub: 
 # https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/app.py
 
-@app.route("/edit_membership/<int:membershipID>", methods=["POST"])
+@app.route("/edit_membership/<string:membershipID>", methods=["POST"])
 def edit_membership(membershipID):
     if request.method == "POST":
         # grab user form inputs
@@ -523,12 +564,6 @@ def delete_class(id):
     # query to delete a member with our passed id
     query = "DELETE FROM Classes WHERE classID = %s;"
 
-    # cursor = db_connection.cursor()
-    # cursor.execute(query, (id,))
-    # db_connection.commit()
-    # cursor.close()
-    # # db_connection.close()
-
     # set up cursor to pass through data and commit
     cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (id,))
     cursor.close()
@@ -569,7 +604,6 @@ def get_edit_class(classID):
 def edit_class(classID):
     if request.method == "POST":
         # grab user form inputs
-        # classID = request.form.get("classID")
         classType = request.form.get("classType")
         schedule = request.form.get("schedule")
         trainerID = request.form.get("trainerID")  
@@ -590,12 +624,6 @@ def edit_class(classID):
             trainerID = %s
         WHERE classID = %s;
         """
-        
-        # execute the query
-        # cursor = db_connection.cursor()
-        # cursor.execute(query, data)
-        # db_connection.commit()
-        # cursor.close()
 
         # set up cursor to pass through data and commit
         cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (*data,))
@@ -607,6 +635,13 @@ def edit_class(classID):
 # def members_classes_page():
 #    return get_member_classes_page()
 
+# KEEP JUST IN CASE:
+
+        # execute the query
+        # cursor = db_connection.cursor()
+        # cursor.execute(query, data)
+        # db_connection.commit()
+        # cursor.close()
 
 # Listener
 if __name__ == "__main__":
