@@ -1,5 +1,5 @@
 {# 
--- Citation for code to create the edit_member jinja2 file layout and populated dropdown menus
+-- Citation for code to create the edit_class jinja2 file layout and populated dropdown menus
 -- Date: 2/27/24
 -- Based on OSU Flask Starter App GitHub: 
 https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/templates/edit_people.j2 
@@ -35,7 +35,6 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
 
                     <label for="trainerID">Trainer:</label>
                     <select name="trainerID" id="trainerID" required>
-                        {# <option value="">None</option> #}
                         {% for trainer in trainers %}
                         <!-- If the value iterated trainer matches the value of the trainer of member currently Editing, pre-select that option -->
                             <option value="{{ trainer.trainerID }}" {% if trainer.trainerID == trainer.trainerID %} selected {% endif %}>

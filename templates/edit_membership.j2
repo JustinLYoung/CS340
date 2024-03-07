@@ -1,5 +1,5 @@
 {# 
--- Citation for code to create the edit_member jinja2 file layout and populated dropdown menus
+-- Citation for code to create the edit_membership jinja2 file layout and populated dropdown menus
 -- Date: 2/27/24
 -- Based on OSU Flask Starter App GitHub: 
 https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/templates/edit_people.j2 
@@ -18,20 +18,17 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     </header>
     <div id="edit">
         <!-- form to edit data in Memberships Page-->
-        {# <form id="editMembership" action="/edit_membership/{{ membership.membershipID }}" method="POST"> #}
         <form id="editMembership" action="/edit_membership/{{ membership.membershipID }}" method="POST">
 
             <fieldset>
                 <legend>Membership Details</legend>
             
                 <!-- We can preset form inputs to match attributes currently stored for 'id' of person to be updated via value= and accessing our passed data tuple -->
-                <!-- Create hidden form input to store the passed 'id' of the person we are editing so we can access it easily in our 'POST' method in our app.py -->
+                <!-- Create hidden form input to store the passed 'id' of the membership we are editing so we can access it easily in our 'POST' method in our app.py -->
                 <input type="hidden" value="{{membership.membershipID}}" class="form-control" id="membershipID" name="membershipID" required>
 
                 <label for="price">Price:</label>
                 <input type="number" name="price" id="price" value="{{ membership.price }}" required step="0.01" placeholder="59.99" title="Please enter a price with two decimal places. For example, 59.99">
-
-                {# <input type="number" name="price" id="price" value="{{ membership.price }}" required> #}
                     
                 <label for="details">Details:</label>
                 <input type="text" name="details" id="details" value="{{ membership.details }}" required>
