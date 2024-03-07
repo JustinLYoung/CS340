@@ -1,0 +1,44 @@
+{# 
+-- Citation for code to create the add_member jinja2 file layout and populated dropdown menus
+-- Date: 2/27/24
+-- Based on OSU Flask Starter App GitHub: 
+https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/templates/edit_people.j2
+#}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Class</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/css/main.css'>
+</head>
+<body>
+    <header>
+        <h1>Add New Class</h1>
+    </header>
+
+    <form action="/add_class" method="POST">
+        <fieldset>
+            
+            <label for="classType">Type</label>
+            <input type="text" name="classType" id="classType" required>
+            
+            <label for="schedule">Schedule</label>
+            <input type="text" name="schedule" id="schedule" required>
+
+            <label for="trainerID">Trainer</label>
+            <select name="trainerID" id="trainerID">
+                {# <option value="">None</option> #}
+                {% for trainer in trainers %}
+                <option value="{{ trainer.trainerID }}">{{ trainer.Trainer }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" value="Add New Class" name="Add_New_Class" class="btn btn-primary" style="margin:.5rem;">
+            <a href='/members'><input class="btn" type="button" value="cancel"></a>
+
+        </fieldset>
+
+    </form>
+</body>
+</html>
