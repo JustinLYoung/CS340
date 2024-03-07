@@ -20,10 +20,7 @@ function deactivate  -d "Exit virtual environment and return to normal shell env
     end
 
     set -e VIRTUAL_ENV
-<<<<<<< HEAD
-=======
     set -e VIRTUAL_ENV_PROMPT
->>>>>>> 099862ad954116ab24a5963c8f21025d0be902e3
     if test "$argv[1]" != "nondestructive"
         # Self-destruct!
         functions -e deactivate
@@ -33,11 +30,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-<<<<<<< HEAD
-set -gx VIRTUAL_ENV "/nfs/stak/users/youngj9/CS340/Elite-Fitness-CRUD/venv"
-=======
 set -gx VIRTUAL_ENV "/Users/oliviacruz/cs340/venv"
->>>>>>> 099862ad954116ab24a5963c8f21025d0be902e3
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
@@ -69,8 +62,5 @@ if test -z "$VIRTUAL_ENV_DISABLE_PROMPT"
     end
 
     set -gx _OLD_FISH_PROMPT_OVERRIDE "$VIRTUAL_ENV"
-<<<<<<< HEAD
-=======
     set -gx VIRTUAL_ENV_PROMPT "(venv) "
->>>>>>> 099862ad954116ab24a5963c8f21025d0be902e3
 end

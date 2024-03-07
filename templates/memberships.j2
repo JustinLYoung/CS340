@@ -1,5 +1,5 @@
 {# 
--- Citation for code to create the members jinja2 file layout and populated table
+-- Citation for code to create the memberships jinja2 file layout and populated table
 -- Date: 2/27/24
 -- Based on OSU Flask Starter App GitHub: 
 https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/templates/edit_people.j2
@@ -47,7 +47,7 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
             <tr>
                 <td>
             
-                <a href='/edit_membership/{{ membershipID }}'><input class="btn" type="button" value="Edit"></a>
+                <a href='/edit_membership/{{ membership.ID }}'><input class="btn" type="button" value="Edit"></a>
                 <a href='/delete_membership/{{ membership.ID }}'><input class="btn" type="button" value="Delete"></a>
 
                 </td>

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-#!/nfs/stak/users/youngj9/CS340/Elite-Fitness-CRUD/venv/bin/python3
-=======
 #!/Users/oliviacruz/cs340/venv/bin/python
->>>>>>> 099862ad954116ab24a5963c8f21025d0be902e3
 # -*- coding: utf-8 -*-
 import re
 import sys
