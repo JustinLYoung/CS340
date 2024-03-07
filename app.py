@@ -164,12 +164,6 @@ def edit_trainer(trainerID):
             lastName = %s
         WHERE trainerID = %s;
         """
-        
-        # # execute the query
-        # cursor = db_connection.cursor()
-        # cursor.execute(query, data)
-        # db_connection.commit()
-        # cursor.close()
 
         # set up cursor to pass through data and commit
         cursor = db.execute_query(db_connection = db_connection, query = query, query_params = (*data,))
@@ -632,7 +626,6 @@ def add_class():
         cursor = db.execute_query(db_connection= db_connection, query=query, query_params= (*data, ))
         cursor.close()
 
-
     # redirect back to classes page
     return redirect("/classes")
 
@@ -717,9 +710,28 @@ def edit_class(classID):
 
     return redirect("/classes")
 # ----------------------------- MemberClasses Page ---------------------------
-# @app.route("/members_classes")
-# def members_classes_page():
-#    return get_member_classes_page()
+@app.route("/members_classes")
+def members_classes_page():
+   return get_member_classes_page()
+
+@app.route("/members_classes")
+# add and organize data to be displayed on the MembersClasses table
+def get_member_classes_page():
+#     query = """
+#     SELECT
+#     Classes.classID AS 'ID',
+#     Member.memberID AS "Memb
+# #     Classes.classType AS 'Type',
+# #     Classes.schedule AS 'Schedule', 
+# #     CONCAT(Trainers.firstName, ' ', Trainers.lastName) AS 'Trainer'
+# #     FROM Classes
+# #     LEFT JOIN Trainers
+# #     ON Classes.trainerID = Trainers.trainerID;
+#     """
+#     cursor = db.execute_query(db_connection=db_connection, query=query)
+#     results = cursor.fetchall()
+
+    return render_template("members_classes.j2");
 
 # KEEP JUST IN CASE:
 
