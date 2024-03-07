@@ -10,7 +10,7 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Membership</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/css/main.css'>
 </head>
 <body>
     <header>
@@ -22,14 +22,13 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
             <input type="text" name="membershipID" id="membershipID" required>
             
             <label for="price">Price</label>
-            <input type="text" name="price" id="price" required>
+            <input type="number" name="price" id="price" required>
             
             <label for="details">Details</label>
             <input type="text" name="details" id="details" required>    
 
-        </fieldset>
-            <input type="submit" value="Add New Membership" name="Add_New_Membership" class="btn btn-primary" style="margin:.5rem;">
-            <a href='/members'><input class="btn" type="button" value="cancel"></a>
+            <input type="submit" value="Add Membership" name="Add_Membership" class="btn btn-primary" style="margin:.5rem;">
+            <a href='/memberships'><input class="btn" type="button" value="cancel"></a>
 
         </fieldset>
 

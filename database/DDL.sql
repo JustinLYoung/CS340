@@ -28,7 +28,7 @@ VALUES
 ('Alyson', 'Sherman'),
 ('Mia', 'Maddox');
 
--- Drop Memberhips table if the table exists.
+-- Drop Memberships table if the table exists.
 DROP TABLE IF EXISTS Memberships;
 -- Create new table called Memberships with membershipID as primary key.
 CREATE TABLE Memberships (
@@ -58,7 +58,7 @@ CREATE TABLE Members (
     joinDate DATE NOT NULL,
     birthday DATE NOT NULL,
     membershipID VARCHAR(45) NOT NULL,
-    trainerID INT,
+    trainerID INT NULL,
     PRIMARY KEY(memberID),
     FOREIGN KEY(membershipID) REFERENCES Memberships(membershipID)
     ON DELETE CASCADE,
@@ -109,8 +109,10 @@ CREATE TABLE MemberClasses (
     memberID INT NOT NULL,
     classID INT NOT NULL,
     PRIMARY KEY (memberClassesID),
-    FOREIGN KEY (memberID) REFERENCES Members(memberID),
+    FOREIGN KEY (memberID) REFERENCES Members(memberID)
+    ON DELETE CASCADE,
     FOREIGN KEY (classID) REFERENCES Classes(classID)
+    ON DELETE CASCADE
 );
 
 -- Add sample data to Member_Classes.

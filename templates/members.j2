@@ -11,19 +11,19 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Members</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/css/main.css'>
 </head>
 <body>
     <header>
         <h1>Elite Fitness Gym</h1>
     </header>
     <nav>
-        <a href="index">Home</a> 
-        <a href="members">Members</a> 
-        <a href="memberships">Memberships</a> 
-        <a href="trainers">Trainers</a> 
-        <a href="classes">Classes</a> 
-        <a href="members_classes">MemberClasses</a>
+        <a href="/">Home</a> 
+        <a href="/members">Members</a> 
+        <a href="/memberships">Memberships</a> 
+        <a href="/trainers">Trainers</a> 
+        <a href="/classes">Classes</a> 
+        <a href="/members_classes">MemberClasses</a>
     </nav>
     <br>
     <fieldset>
@@ -33,7 +33,10 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     <table>
         <thead>
             <tr>
-                <th><a href="/add_member" class="btn">Add New Member</a></th>
+                <th>
+                <a href="/add_member" class="btn">Add Member</a>
+                </th>
+
                 <th>ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
