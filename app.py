@@ -826,4 +826,4 @@ def edit_class(classID):
 if __name__ == "__main__":
 
     #Start the app on port 3000, it will be different once hosted
-    app.run(port=31312, debug=True)
+    app.run(port=31314, debug=True)
