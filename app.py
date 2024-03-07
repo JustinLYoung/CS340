@@ -322,7 +322,7 @@ def trainers():
     # Grab bsg_people data so we send it to our template to display
     if request.method == "GET":
         # mySQL query to grab all the people in bsg_people
-        query = "SELECT trainerID AS 'ID', firstName AS 'First Name', lastName AS 'Last Name' FROM Trainers;"
+        query = "SELECT * FROM Trainers;"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()

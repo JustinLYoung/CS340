@@ -28,10 +28,6 @@ deactivate () {
     fi
 
     unset VIRTUAL_ENV
-<<<<<<< HEAD
-=======
-    unset VIRTUAL_ENV_PROMPT
->>>>>>> 099862ad954116ab24a5963c8f21025d0be902e3
     if [ ! "${1:-}" = "nondestructive" ] ; then
     # Self destruct!
         unset -f deactivate
@@ -41,11 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-<<<<<<< HEAD
 VIRTUAL_ENV="/nfs/stak/users/youngj9/CS340/Elite-Fitness-CRUD/venv"
-=======
-VIRTUAL_ENV="/Users/oliviacruz/cs340/venv"
->>>>>>> 099862ad954116ab24a5963c8f21025d0be902e3
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
@@ -64,11 +56,6 @@ if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
     _OLD_VIRTUAL_PS1="${PS1:-}"
     PS1="(venv) ${PS1:-}"
     export PS1
-<<<<<<< HEAD
-=======
-    VIRTUAL_ENV_PROMPT="(venv) "
-    export VIRTUAL_ENV_PROMPT
->>>>>>> 099862ad954116ab24a5963c8f21025d0be902e3
 fi
 
 # This should detect bash and zsh, which have a hash command that must
