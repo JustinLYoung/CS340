@@ -1,153 +1,61 @@
-<!-- Citation for the following: app.py -->
-<!-- Date: 2/29/2024 -->
-<!-- Copied from: Github osu-cs340-ecampus / flask-starter-app (people.j2) -->
-<!-- Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app -->
+{# 
+-- Citation for code to create the members jinja2 file layout and populated table
+-- Date: 2/27/24
+-- Based on OSU Flask Starter App GitHub: 
+https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/templates/edit_people.j2
+#}
 
-<html>
-<!-- Adapted from the Trainers.html UI design -->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Trainers</title>
-	<link rel='stylesheet' type='text/css' media='screen' href='/static/css/main.css'>
-	<script language="JavaScript">
-	function showform(dowhat) {
-		/*
-		 * four DIVS: browse, insert, update, delete
-		 * this function sets one visible the others not
-		 */
-		if(dowhat == 'insert') {
-			document.getElementById('browse').style.display = 'none';
-			document.getElementById('insert').style.display = 'block';
-			document.getElementById('edit').style.display = 'none';
-			document.getElementById('delete').style.display = 'none';
-		} else if(dowhat == 'update') {
-			document.getElementById('browse').style.display = 'none';
-			document.getElementById('insert').style.display = 'none';
-			document.getElementById('edit').style.display = 'block';
-			document.getElementById('delete').style.display = 'none';
-		} else if(dowhat == 'delete') {
-			document.getElementById('browse').style.display = 'none';
-			document.getElementById('insert').style.display = 'none';
-			document.getElementById('edit').style.display = 'none';
-			document.getElementById('delete').style.display = 'block';
-		} else if(dowhat == 'all') {
-			document.getElementById('browse').style.display = 'block';
-			document.getElementById('insert').style.display = 'block';
-			document.getElementById('edit').style.display = 'block';
-			document.getElementById('delete').style.display = 'block';
-		} else { //by default display browse
-			document.getElementById('browse').style.display = 'block';
-			document.getElementById('insert').style.display = 'none';
-			document.getElementById('edit').style.display = 'none';
-			document.getElementById('delete').style.display = 'none';
-		}
-	}
-
-	function newTrainer() {
-		showform('insert');
-	}
-
-	function updateTrainer(pid) {
-		showform('update');
-	}
-
-	function deleteTrainer(pid) {
-		showform('delete');
-	}
-
-	function browseTrainers() {
-		showform('browse');
-	}
-
-	function showAll() {
-		showform('all');
-	}
-	</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/css/main.css'>
 </head>
-
-<body onload="browseTrainers()">
+<body>
     <header>
         <h1>Elite Fitness Gym</h1>
     </header>
-	    <nav>
-        <a href="/index">Home</a> 
+    <nav>
+        <a href="/">Home</a> 
         <a href="/members">Members</a> 
         <a href="/memberships">Memberships</a> 
         <a href="/trainers">Trainers</a> 
         <a href="/classes">Classes</a> 
         <a href="/members_classes">MemberClasses</a>
     </nav>
-	<div id="browse">
-		<p>,<center><button><a href="#" onClick="newTrainer()">Add New Trainer</a></button></center> </p>
-		<table border="1" cellpadding="5">
-            <!-- Access data tuple passed from app.py --> 
-			<h2><center>Trainers</center></h2>
-            {% if data %}
-			    <thead>
-				    <tr>
-					    <!-- Iterate through each key in the first entry to get the column name -->
-                        {% for key in data[0].keys() %}
-					    
-                        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
-					    <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
-					
-                        <!-- End of this for loop -->
-                        {% endfor %} 
-                    </tr>
+    <br>
+    <fieldset>
+        <h2>Trainers</h2>
+        <table>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                <a href="/add_trainer" class="btn" type="button" >Add Trainer</a>
+                </th>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trainer in Trainers %}
+            <tr>
+                <td>
+            
+                <a href='/edit_trainer/{{ trainer.ID }}'><input class="btn" type="button" value="Edit"></a>
+                <a href='/delete_trainer/{{ trainer.ID }}'><input class="btn" type="button" value="Delete"></a>
 
-				<tbody>
-					<!-- Now, iterate through every item in data -->{% for item in data %}
-					    <tr>
-						    <!-- Then iterate through every key in the current item dictionary -->
-                            {% for key in item.keys() %}
-
-						    <!-- Create a <td> element with the value of that key in it -->
-						    <td> {{item[key]}} </td> 
-                            {% endfor %}
-
-                            <!-- Create our edit/delete buttons -->
-						    <td><a href="edit_trainers/{{item.trainerID}}" class="btn btn-default">Edit</a></td>
-						    <td><a href="delete_trainers/{{item.trainerID}}" class="btn btn-default">Delete</a></td>
-
-					    </tr> 
-                        {% endfor %} 
-                {% endif %} 
-        </table>   
-	<p>&nbsp;</p>
-	</div>	<!-- browse -->
-
-	<div id="insert">
-		<!-- form to INSERT new data into bsg_Trainers-->
-		<form id="insertTrainer" action="/trainers" method="post">
-			<legend><strong>Add Trainers</strong></legend>
-			<fieldset>
-                <!-- placeholder shows ghost text, required forces an input, pattern forces input adherence -->
-				<label for="make">first name:</label>
-				<input type="text" class="form-control" id="firstName" name="firstName" pattern="[A-Za-z]{1,}" placeholder="" required>
-
-				<label for="model">last name:</label>
-				<input type="text" class="form-control" id="lastName" name="lastName" pattern="[A-Za-z0-9]{1,}" placeholder="" required>
-            </fieldset>
-
-            <!-- Create 'Add Trainers' and 'Cancel' buttons -->
-			<input type="submit" value="Add Trainers" name="Add_Trainer" class="btn btn-primary" style="margin:.5rem;">
-			<input class="btn" type="button" value="Cancel" onClick="browseTrainers()"> 
-        </form>
-	</div><!--insert-->
-	
-	<div id="edit">
-		<!-- form to edit data in bsg_Trainers-->
-		<form id="edittrainer" action="/edit_trainers/{{data[0].id}}" method="post">
-			<legend><strong>Edit Trainers</strong></legend>
-			<fieldset>
-				<input type="hidden" value="{{data[0].id}}" class="form-control" id="TrainerID" name="TrainerID" required>
-				<label for="make">first name:</label>
-
-				<input type="text" class="form-control" id="firstName" name="firstName" pattern="[A-Za-z]{1,}" placeholder="{{data[0].firstName}}" required>
-				<label for="model">last name:</label>
-                
-                <input type="text" class="form-control" id="lastName" name="lastName" pattern="[A-Za-z0-9]{1,}" placeholder="{{data[0].lastName}}" required>
-
-        </form>
-	</div><!--edit-->
+                </td>
+                <td>{{ trainer['ID'] }}</td>
+                <td>{{ trainer['First Name'] }}</td>
+                <td>{{ trainer['Last Name'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

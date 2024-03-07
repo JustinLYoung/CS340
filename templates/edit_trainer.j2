@@ -1,0 +1,43 @@
+{# 
+-- Citation for code to create the edit_member jinja2 file layout and populated dropdown menus
+-- Date: 2/27/24
+-- Based on OSU Flask Starter App GitHub: 
+https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_app/templates/edit_people.j2 
+#}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit a Trainer</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/css/main.css'>
+</head>
+<body>
+    <header>
+        <h1>Edit a Trainer/h1>
+    </header>
+    <div id="edit">
+        <!-- form to edit data in Trainers Page-->
+        <form id="editTrainer" action="/edit_trainer/{{ trainer.trainerID }}" method="POST">
+            <fieldset>
+                <legend>Trainer Details</legend>
+
+                    <!-- We can preset form inputs to match attributes currently stored for 'id' of person to be updated via value= and accessing our passed data tuple -->
+                    <!-- Create hidden form input to store the passed 'id' of the person we are editing so we can access it easily in our 'POST' method in our app.py -->
+                    <input type="hidden" value="{{trainer.trainerID}}" class="form-control" id="trainerID" name="trainerID" required>
+                    
+                    <label for="firstName">First Name:</label>
+                    <input type="text" name="firstName" id="firstName" value="{{ trainer.firstName }}" required>
+                    
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" name="lastName" id="lastName" value="{{ trainer.lastName }}" required>
+                                   
+
+
+                        
+                </fieldset>
+                <input type="submit" value="Edit Trainer" name="Edit Trainer" class="btn btn-primary" style="margin:.5rem;">
+                <a href='/trainers'><input class="btn" type="button" value="cancel"></a>
+            </form>
+
+</html>
