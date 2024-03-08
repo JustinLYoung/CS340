@@ -1,6 +1,6 @@
-/venv
-/.vscode
+# /venv
+# /.vscode
 
-.env
-.vscode
-__pycache__
+# .env
+# .vscode
+# __pycache__
