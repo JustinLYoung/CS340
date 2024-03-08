@@ -20,13 +20,13 @@ CREATE TABLE Trainers (
 ALTER TABLE Trainers AUTO_INCREMENT = 9000;
 
 -- Add sample data to Trainers table.
-Insert INTO Trainers (firstName, lastName)
+Insert INTO Trainers (trainerID, firstName, lastName)
 VALUES
-('Billy', 'Decker'),
-('Logan', 'Cordova'),
-('Ethen', 'Pollard'),
-('Alyson', 'Sherman'),
-('Mia', 'Maddox');
+(9000,	"Billy", "Decker"),
+(9001,	"Logan", "Cordova"),
+(9002,	"Ethen", "Pollard"),
+(9003,	"Alyson", "Sherman"),
+(9004,	"Mia", "Maddox");
 
 -- Drop Memberhips table if the table exists.
 DROP TABLE IF EXISTS Memberships;
@@ -41,9 +41,9 @@ CREATE TABLE Memberships (
 -- Add sample data to Memberships table.
 Insert INTO Memberships (membershipID, price, details)
 VALUES
-('Gold', '59.99', 'Gym only'),
-('Platinum', '79.99', 'Gym + 1 class per week'),
-('Diamond',	'99.99', 'Gym + Unlimited classes');
+("Gold", "59.99", "Gym only"),
+("Platinum", "79.99", "Gym + 1 class per week"),
+("Diamond",	"99.99", "Gym + Unlimited classes");
 
 -- Drop Members table if the table exists.
 DROP TABLE IF EXISTS Members;
@@ -53,7 +53,7 @@ CREATE TABLE Members (
     memberID INT NOT NULL AUTO_INCREMENT UNIQUE,
     firstName VARCHAR(45) NOT NULL,
     lastName VARCHAR(45) NOT NULL,
-    phoneNumber VARCHAR(12) NOT NULL,
+    phoneNumber VARCHAR(10) NOT NULL,
     email VARCHAR(100) NOT NULL,
     joinDate DATE NOT NULL,
     birthday DATE NOT NULL,
@@ -67,13 +67,13 @@ CREATE TABLE Members (
 );
 
 -- Add sample data to Members table.
-Insert INTO Members (firstName, lastName, phoneNumber, email, joinDate, birthday, membershipID, trainerID)
+Insert INTO Members (memberID, firstName, lastName, phoneNumber, email, joinDate, birthday, membershipID, trainerID)
 VALUES
-('Cherish', 'Wells', '815-637-9546', 'Cherish.Wells@gmail.com', '2021-03-19',	'2004-09-12', 'Gold', 9001),
-('Gracie', 'Jennings', '424-868-7341', 'Gracie.Jennings@gmail.com', '2021-03-19', '2002-07-28', 'Diamond', 9001),
-('Irvin', 'Hodges', '232-983-1705', 'Irvin.Hodges@gmail.com', '2021-05-03',	'1974-10-18', 'Gold', NULL),
-('Kole',	'Pennington', '437-792-9413', 'Kole.Pennington@gmail.com', '2021-05-03', '1975-04-10', 'Platinum', 9004),
-('Roselyn', 'Velez', '764-605-3748',	'Roselyn.Velez@gmail.com',	'2021-05-03',	'1989-07-17', 'Diamond', 9003);
+(1, "Cherish", "Wells", "815-637-9546", "Cherish.Wells@gmail.com", "2021-03-19",	"2004-09-12", "Gold", 9001),
+(2,	"Gracie", "Jennings", "424-868-7341", "Gracie.Jennings@gmail.com", "2021-03-19", "2002-07-28", "Diamond", 9001),
+(3,	"Irvin", "Hodges", "232-983-1705", "Irvin.Hodges@gmail.com", "2021-05-03",	"1974-10-18", "Gold", NULL),
+(4,	"Kole",	"Pennington", "437-792-9413", "Kole.Pennington@gmail.com", "2021-05-03", "1975-04-10", "Platinum", 9004),
+(5,	"Roselyn", "Velez", "764-605-3748",	"Roselyn.Velez@gmail.com",	"2021-05-03",	"1989-07-17", "Diamond", 9003);
 
 -- Drop Classes table if table exists.
 DROP TABLE IF EXISTS Classes;
@@ -90,13 +90,13 @@ CREATE TABLE Classes (
 );
 
 -- Add sample data to Classes table.
-Insert INTO Classes (classType, schedule, trainerID)
+Insert INTO Classes (classID, classType, schedule, trainerID)
 VALUES
-('HITT', '2024/02/05 08:00:00', 9004),
-('Boxing', '2024/02/05 10:00:00', 9002),
-('BJJ', '2024/02/05 12:00:00', 9003),
-('Yoga', '2024/02/05 14:00:00', 9000),
-('Cycling', '2024/02/05 15:00:00', 9001);
+(1, "HITT", "2024/02/05 08:00:00", 9004),
+(2, "Boxing", "2024/02/05 10:00:00", 9002),
+(3, "BJJ", "2024/02/05 12:00:00", 9003),
+(4, "Yoga", "2024/02/05 14:00:00", 9000),
+(5, "Cycling", "2024/02/05 15:00:00", 9001);
 
 -- Drop Member_Classes table if table exists.
 DROP TABLE IF EXISTS MemberClasses;
@@ -114,13 +114,13 @@ CREATE TABLE MemberClasses (
 );
 
 -- Add sample data to Member_Classes.
-INSERT INTO MemberClasses(memberID, classID)
+INSERT INTO MemberClasses(memberClassesID, memberID, classID)
 VALUES
-(1,1),
-(2,1),
-(5,1),
-(4,2),
-(3,3);
+(1,1,1),
+(2,2,1),
+(3,5,1),
+(4,4,2),
+(5,3,3);
 
 
 -- Citation for code to enable commits and foreign key checks

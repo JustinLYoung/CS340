@@ -10,15 +10,16 @@ https://github.com/osu-cs340-ecampus/flask-starter-app/blob/master/bsg_people_ap
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit a Member</title>
-    <link rel='stylesheet' type='text/css' media='screen' href='/static/css/main.css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
     <header>
         <h1>Edit a Member</h1>
     </header>
     <div id="edit">
-        <!-- form to edit data in Members Page-->
+        <!-- form to edit data in members-->
         <form id="editMember" action="/edit_member/{{ member.memberID }}" method="POST">
+            {# <legend><strong>Edit a Member</strong></legend> #}
             <fieldset>
                 <legend>Member Details</legend>
 
