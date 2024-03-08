@@ -745,4 +745,4 @@ def get_member_classes_page():
 if __name__ == "__main__":
 
     #Start the app on port 3000, it will be different once hosted
-    app.run(port=31312, debug=True)
+    app.run(port=31311, debug=True)
